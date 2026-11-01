@@ -28,7 +28,7 @@ The project runs in exactly **10 sequential prompts**. Do only the current promp
 | 9 | Remotion 60fps autoplay store banner video & 8 framed frosted glass ASO screenshots |
 | 10 | GitHub push, GitHub Pages SEO site + Privacy Policy + app-ads.txt, Search Console verification/sitemap, Play Console publishing |
 
-**Status:** Prompt 1 ✅ · Prompt 2 ✅ (Gradle/API 36, theme + glass components, DimensionFormatter, Screens 1–2) · Prompt 3 ✅ (Screen 3 AR tape, dual engine) · Prompt 4 ✅ (Screen 4 blueprint, CAD editor, A4 PDF) · Prompt 5 ✅ (Screens 5–7) · Prompt 6 ✅ (Screens 8–10 + 3 Glance widgets) · Prompt 7 ✅ (AdMob + UMP + Billing Pro; 63 unit tests) · Prompt 8 ✅ (ADB audit of all 10 screens + 3 widgets; raw shots in `playstore_assets/raw_screenshots/`) · Prompt 9 ✅ (Remotion banner 16:9 + 9:16, 8 store shots, feature graphic, icon). All 10 screens are built; `ComingNextScreen` is no longer used.
+**Status:** Prompt 1 ✅ · Prompt 2 ✅ (Gradle/API 36, theme + glass components, DimensionFormatter, Screens 1–2) · Prompt 3 ✅ (Screen 3 AR tape, dual engine) · Prompt 4 ✅ (Screen 4 blueprint, CAD editor, A4 PDF) · Prompt 5 ✅ (Screens 5–7) · Prompt 6 ✅ (Screens 8–10 + 3 Glance widgets) · Prompt 7 ✅ (AdMob + UMP + Billing Pro; 63 unit tests) · Prompt 8 ✅ (ADB audit of all 10 screens + 3 widgets; raw shots in `playstore_assets/raw_screenshots/`) · Prompt 9 ✅ (Remotion banner 16:9 + 9:16, 8 store shots, feature graphic, icon). All 10 screens are built; `ComingNextScreen` is no longer used. · Prompt 10 ✅ (signed AAB, GitHub repo + Pages site, fastlane metadata; Search Console + Play upload need the owner — see `PLAY_STORE_AND_SEO_SUBMISSION_SUMMARY.md`).
 
 ### Screen 3 — AR tape (`data/ar/`, `ui/screens/artape/`)
 - `SpatialMeasureController` owns the `MeasurementSession` (pure, unit-tested state for Single Line / Room Chain / 3D Box Fit / Angle) and is fed by one `MeasureEngine`:
@@ -52,6 +52,12 @@ The project runs in exactly **10 sequential prompts**. Do only the current promp
 - **Projects gallery** (`ui/screens/projects`): filters All/Floorplans/AR Fit Checks/Tool Readings/Material PDFs, search, 1-tap blueprint export, delete with confirm. Tool readings open their tool screen.
 - **Widgets** (`ui/widgets`): `SpatialGlassHubWidgetReceiver` 4×2, `AiQuickConverterWidgetReceiver` 2×2, `MinimalGlassBarWidgetReceiver` 4×1. Data via Hilt `WidgetEntryPoint`; refreshed from `MeasurePulseApplication` when scans/prefs change. Taps → `WidgetRoutes.intent(route)` → `DeepLinks` → NavHost. Backgrounds are shape drawables (`widget_*`) because Glance `cornerRadius` only works on Android 12+. Widgets can't stream sensors: the level badge shows the last saved reading.
 - **Screen 10** (`ui/screens/settings/GlassWidgetsAndProScreen`, route `pro`): widget previews + `requestPinGlanceAppWidget` (works on the Oppo launcher) + Pro pass card (Play Billing purchase, Restore Purchase, Privacy & ads) + debug-only monetization tools card.
+
+### Publishing (Prompt 10) — `docs/`, `fastlane/`
+- Repo: github.com/sunilkumar101/measurepulse-ai-ar-tape (public). Pages serves `docs/` from `main` at https://sunilkumar101.github.io/measurepulse-ai-ar-tape/ (index, privacy-policy, terms, 404, sitemap, robots, app-ads.txt template). Preview locally with the `docs-site` launch config (port 8080). Bump `site.css?v=` when CSS changes.
+- Never commit: keystore/, keystore.properties, local.properties, service-account JSON, .cache/, .agents/, .claude/skills/. Raw phone captures must have the status bar blanked (personal notification icons).
+- Privacy policy promises camera/depth/voice never leave the device: `VoiceMarkTrigger` must only use `createOnDeviceSpeechRecognizer` (else the local sound-burst trigger). Keep it that way.
+- Store listing: `fastlane/metadata/android/en-US/` (title ≤30, short ≤80, full ≤4000). Lanes: `bundle exec fastlane internal | metadata` (needs Ruby + `fastlane/play-service-account.json`).
 
 ### Monetization (Prompt 7) — `ads/`, `billing/`, `data/monetization/`
 - **IDs:** `app/build.gradle.kts` — debug ALWAYS uses Google's sample IDs (app, banner `/9214589741`, interstitial `/1033173712`, rewarded `/5224354917`, native `/2247696110`). Release reads `measurepulse.admob.{appId,banner,interstitial,rewarded,native}` from `local.properties` or `gradle.properties` (blank → sample IDs). Manifest app ID = `${admobAppId}` placeholder. Test-device hash for the Oppo lives in git-ignored `local.properties` (`measurepulse.admob.testDeviceIds`).
@@ -159,7 +165,7 @@ Use `/stitch-glass-ui <screen>` to implement a screen from its design.
 - System Java is JDK 25, which Gradle 8.13 can't run on. **Always** build with `export JAVA_HOME="/c/Program Files/Android/Android Studio/jbr"` (JDK 21).
 - Toolchain: Gradle 8.13 wrapper, AGP 8.13.0, Kotlin 2.2.20, KSP 2.2.20-2.0.4, Hilt 2.57.2, Compose BOM 2025.07.00 (no `Modifier.dropShadow` — use `Modifier.glow`).
 - `buildToolsVersion = "36.0.0"` is pinned because the local build-tools 35.0.0 install is corrupt.
-- Release builds are debug-signed until `keystore.properties` exists (Prompt 10). Release cold start ≈ 0.5 s; debug ≈ 4 s (unminified, interpreted — debug only).
+- Release builds are signed with the Play upload key from git-ignored `keystore.properties` → `keystore/measurepulse-upload.jks` (passwords in `keystore/KEYSTORE_CREDENTIALS.txt`); without it they fall back to debug signing. Release cold start ≈ 0.5 s; debug ≈ 4 s (unminified, interpreted — debug only).
 - Use Git Bash for binary redirects (`adb exec-out screencap -p > build/live_screen.png`); PowerShell 5 corrupts them. Set `MSYS_NO_PATHCONV=1` so `/sdcard/...` isn't rewritten to a Windows path.
 - Test phone: Oppo CPH1937, Android 11, 720×1600 (360 dp wide), **no ARCore** → app runs in "Sensor Mode". Oppo blocks `pm clear` and `cmd package compile` over ADB.
 - `tools/adb_ui.py` tap prefers clickable + exact-text nodes; text fields need a tap on their placeholder before `input text`; never send BACK to dismiss a keyboard that may not be open.
