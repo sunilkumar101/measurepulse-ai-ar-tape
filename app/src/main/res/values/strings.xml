@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MeasurePulse AI</string>
+    <string name="widget_hub_label">MeasurePulse Glass Hub</string>
+    <string name="widget_hub_desc">Latest room scan, last level reading and 4 quick tools</string>
+    <string name="widget_converter_label">MeasurePulse Converter</string>
+    <string name="widget_converter_desc">Last measurement in metric and feet-inches with a quick Scan button</string>
+    <string name="widget_bar_label">MeasurePulse Tool Dock</string>
+    <string name="widget_bar_desc">Slim bar: Level, Caliper, AR Tape and Help With AI</string>
+</resources>

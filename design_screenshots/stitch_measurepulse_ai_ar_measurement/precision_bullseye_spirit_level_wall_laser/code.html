@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#101223;color:#e0e0f9;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error-container": "#93000a", "on-primary": "#2c3400", "inverse-primary": "#576400", "inverse-on-surface": "#2d2f41", "outline-variant": "#464834", "on-error-container": "#ffdad6", "secondary-container": "#8d00c2", "surface-tint": "#b9d307", "background": "#101223", "primary-container": "#d5ef34", "on-error": "#690005", "primary-fixed-dim": "#b9d307", "on-surface": "#e0e0f9", "on-tertiary-fixed": "#2d0050", "on-primary-fixed-variant": "#414c00", "tertiary-container": "#f1dbff", "on-tertiary-fixed-variant": "#602c8e", "surface-bright": "#36384b", "on-tertiary": "#480e76", "tertiary-fixed-dim": "#deb7ff", "on-tertiary-container": "#7f4caf", "surface-container-lowest": "#0b0d1e", "surface-dim": "#101223", "surface": "#101223", "secondary-fixed-dim": "#eab2ff", "primary-fixed": "#d5ef34", "on-background": "#e0e0f9", "on-surface-variant": "#c6c9ae", "on-secondary-container": "#edbcff", "outline": "#90937a", "tertiary": "#ffffff", "secondary-fixed": "#f7d8ff", "surface-container-high": "#27293b", "inverse-surface": "#e0e0f9", "tertiary-fixed": "#f1dbff", "surface-container-low": "#181a2c", "error": "#ffb4ab", "on-secondary-fixed": "#310047", "secondary": "#eab2ff", "on-primary-container": "#5d6b00", "on-primary-fixed": "#191e00", "surface-container-highest": "#323346", "on-secondary-fixed-variant": "#7400a1", "surface-variant": "#323346", "on-secondary": "#510072", "surface-container": "#1c1e30", "primary": "#ffffff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "0.875rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin": "1.25rem", "gutter-tablet": "1.5rem", "gutter": "1rem", "space-lg": "1.25rem", "margin-tablet": "2rem" }, "fontFamily": { "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "metric-unit": ["JetBrains Mono"], "headline-hero": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "metric-display-mobile": ["JetBrains Mono"], "metric-value": ["JetBrains Mono"], "headline-hero-mobile": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "metric-display": ["JetBrains Mono"], "headline-md": ["Plus Jakarta Sans"], "label-spatial": ["JetBrains Mono"] }, "fontSize": { "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}], "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}], "metric-unit": ["12px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500"}], "headline-hero": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "800"}], "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "metric-display-mobile": ["26px", {"lineHeight": "30px", "letterSpacing": "-0.03em", "fontWeight": "700"}], "metric-value": ["18px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "headline-hero-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.03em", "fontWeight": "800"}], "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400"}], "headline-sm": ["16px", {"lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "600"}], "metric-display": ["34px", {"lineHeight": "38px", "letterSpacing": "-0.04em", "fontWeight": "700"}], "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "label-spatial": ["11px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500"}] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="MeasurePulse Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WAK4Q9HM6Rzrtp_wl22Pn063EFkHdytgwJGT3ixohdhK1E9e7jvDkVvq6Jc1hr3tBs9X_K00ltvoPl04XCuPWUFNh3fXNWsRlXDgrkMTI3Qiig5S-lbSweqDbQ9Lfb4HZ-0yAMi37eP2sJTrAkAQx2FiuoA9IdkjKtAknxSrKO4bYT5Cur3HAmjRMk8JVPSGSODxHfa_vJXMLovSm54CMGkH7jwhNvp85zeu0zYy36"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm font-bold text-on-surface truncate tracking-tight">MeasurePulse AI</span><span class="font-label-spatial text-label-spatial text-primary-container truncate uppercase">Laser Level</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-space-xs bg-surface-container-high/60 backdrop-blur-md px-space-sm py-space-xs rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-spatial text-label-spatial text-on-surface-variant font-medium">LiDAR 60 FPS</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full relative select-none overflow-hidden">
+<!-- AR Viewport Container with Live Camera Feed -->
+<div class="relative w-full h-[620px] overflow-hidden">
+<!-- Camera Image Background -->
+<img alt="AR Camera Viewport showing living room wall with painting and level line" class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT0RVAVMUxJP_e_jPsNZhqsLiUldhPhUkdIGooOQVSSZzAHhhYRj2qk02ByaqK85FEw_Okco7cnp-o8aY4msDyxOKGGIL_ODdhYPKC4junAwzVDsb12m7VdycR2NgKA47gnraWSzaOeGUKjaIj7ixY9BHXL-UJv1XzIbImvRdBhDID28j19WbUBN1vJx5gUcngrPV0AxIj2USFyyOCwpDlUL0MsxXlt2Aei_zlW94"/>
+<!-- Ambient Twilight Atmospheric Vignette Gradients -->
+<div class="absolute inset-0 bg-gradient-to-b from-background/70 via-transparent to-background pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none"></div>
+<!-- Top Floating Header Floating HUD -->
+<div class="absolute top-4 inset-x-margin z-30 flex items-center justify-between"><!-- Back Navigation Button -->
+<button aria-label="Navigate back" class="w-11 h-11 rounded-full bg-[#1c1e36]/70 backdrop-blur-xl border border-white/20 flex items-center justify-center text-[#F4F6FF] shadow-[0_8px_24px_rgba(0,0,0,0.45)] active:scale-95 transition-transform" id="btnBack" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<!-- Center Pill Title -->
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-[#1c1e36]/75 backdrop-blur-2xl border border-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
+<span class="w-2 h-2 rounded-full bg-[#DDF83D] shadow-[0_0_10px_#DDF83D] animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm text-[#F4F6FF] tracking-tight font-semibold">Spirit Level &amp; Wall Laser</span>
+</div>
+<!-- Right Audio/Haptic Toggle Button -->
+<button aria-label="Toggle acoustic alignment ping" class="w-11 h-11 rounded-full bg-[#1c1e36]/70 backdrop-blur-xl border border-white/20 flex items-center justify-center text-[#DDF83D] shadow-[0_8px_24px_rgba(0,0,0,0.45)] active:scale-95 transition-transform" id="btnHapticBeep" type="button">
+<span class="material-symbols-outlined text-[22px]">volume_up</span>
+</button></div>
+<!-- AR Picture-Hanging Laser Overlay System -->
+<div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-center">
+<!-- Frame Target Lock Spatial Corner Brackets (around art on wall) -->
+<div class="absolute top-[18%] left-[16%] w-[34%] h-[40%] pointer-events-none">
+<!-- Top-Left Corner Bracket -->
+<div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-primary-container/80 rounded-tl-sm shadow-[0_0_8px_rgba(213,239,52,0.6)]"></div>
+<!-- Top-Right Corner Bracket -->
+<div class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-primary-container/80 rounded-tr-sm shadow-[0_0_8px_rgba(213,239,52,0.6)]"></div>
+<!-- Bottom-Left Corner Bracket -->
+<div class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-primary-container/80 rounded-bl-sm shadow-[0_0_8px_rgba(213,239,52,0.6)]"></div>
+<!-- Bottom-Right Corner Bracket -->
+<div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-primary-container/80 rounded-br-sm shadow-[0_0_8px_rgba(213,239,52,0.6)]"></div>
+<!-- Frame Locked Status Badge -->
+<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md shadow-[0_0_12px_rgba(213,239,52,0.4)]">
+<span class="material-symbols-outlined text-primary-container text-[13px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-spatial text-label-spatial text-primary-container font-bold tracking-wider">LOCKED 0.0°</span>
+</div>
+</div>
+<!-- AR Projected Laser Line & Emitters -->
+<div class="relative w-full flex items-center">
+<!-- Left Precision Laser Projector Reticle -->
+<div class="absolute left-1 z-20 flex items-center justify-center">
+<div class="w-3.5 h-3.5 rounded-full bg-primary-container shadow-[0_0_16px_rgba(213,239,52,1)] flex items-center justify-center animate-pulse">
+<div class="w-1.5 h-1.5 rounded-full bg-on-primary-container"></div>
+</div>
+</div>
+<!-- Laser Beam Primary Core and Outer Photonic Bloom -->
+<div class="w-full relative flex items-center h-4">
+<!-- Wide Atmospheric Glow -->
+<div class="absolute inset-x-0 h-3 bg-gradient-to-r from-primary-container/20 via-primary-container/40 to-primary-container/20 blur-sm"></div>
+<!-- Intense Core Razor Line -->
+<div class="absolute inset-x-0 h-[2px] bg-primary-container shadow-[0_0_14px_rgba(213,239,52,0.9),0_0_4px_#ffffff]"></div>
+</div>
+<!-- Right Precision Laser Projector Reticle -->
+<div class="absolute right-1 z-20 flex items-center justify-center">
+<div class="w-3.5 h-3.5 rounded-full bg-primary-container shadow-[0_0_16px_rgba(213,239,52,1)] flex items-center justify-center animate-pulse">
+<div class="w-1.5 h-1.5 rounded-full bg-on-primary-container"></div>
+</div>
+</div>
+<!-- Floating Frosted Laser Elevation & Accuracy Readout Badge -->
+<div class="absolute left-1/2 -translate-x-1/2 -top-10 z-20 flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-high/70 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.55),0_0_16px_rgba(213,239,52,0.25)] pointer-events-auto">
+<span class="material-symbols-outlined text-primary-container text-[16px]">horizontal_rule</span>
+<span class="font-metric-value text-metric-value text-primary-container tracking-tight">145.0 <span class="font-metric-unit text-metric-unit text-on-surface-variant font-normal">cm</span></span>
+<span class="w-1 h-3 bg-outline-variant/60 rounded-full mx-1"></span>
+<span class="font-label-spatial text-label-spatial text-on-surface uppercase tracking-wider font-semibold">Eye Level</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(213,239,52,0.9)]"></span>
+<span class="font-metric-value text-metric-value text-primary-container">0.0°</span>
+</div>
+</div>
+</div>
+<!-- Center Precision 2D Bullseye Spirit Bubble Dial Overlay -->
+<div class="absolute inset-0 z-20 flex items-center justify-center pointer-events-none mt-24">
+<div class="relative w-[240px] h-[240px] flex items-center justify-center pointer-events-auto">
+<!-- Main Circular Frosted Glass Disc HUD -->
+<div class="absolute inset-0 rounded-full bg-surface-bright/20 backdrop-blur-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.65),inset_0_1px_2px_rgba(255,255,255,0.4),0_0_30px_rgba(213,239,52,0.15)] overflow-hidden">
+<!-- Concentric Vector Calibration Grid Rings (SVG) -->
+<svg class="w-full h-full absolute inset-0 text-on-surface-variant/30" fill="none" viewbox="0 0 240 240">
+<!-- 10° Outer Degree Ring -->
+<circle cx="120" cy="120" r="110" stroke="currentColor" stroke-dasharray="2 4" stroke-width="1"></circle>
+<!-- 5° Middle Ring -->
+<circle cx="120" cy="120" r="82" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1"></circle>
+<!-- 2° Inner Ring -->
+<circle cx="120" cy="120" r="54" stroke="currentColor" stroke-width="1"></circle>
+<!-- 1° Target Ring -->
+<circle class="text-primary-container/60" cx="120" cy="120" r="28" stroke="currentColor" stroke-width="1.2"></circle>
+<!-- Axis Crosshairs with Graduated Ticks -->
+<line stroke="currentColor" stroke-dasharray="3 3" stroke-width="0.75" x1="120" x2="120" y1="6" y2="234"></line>
+<line stroke="currentColor" stroke-dasharray="3 3" stroke-width="0.75" x1="6" x2="234" y1="120" y2="120"></line>
+<!-- Precision Graduation Cardinal Ticks -->
+<line stroke="#d5ef34" stroke-width="2" x1="120" x2="120" y1="4" y2="14"></line>
+<line stroke="#d5ef34" stroke-width="2" x1="120" x2="120" y1="226" y2="236"></line>
+<line stroke="#d5ef34" stroke-width="2" x1="4" x2="14" y1="120" y2="120"></line>
+<line stroke="#d5ef34" stroke-width="2" x1="226" x2="236" y1="120" y2="120"></line>
+<!-- Degree Labels -->
+<text fill="#c6c9ae" font-family="JetBrains Mono" font-size="8" opacity="0.8" x="123" y="18">10°</text>
+<text fill="#c6c9ae" font-family="JetBrains Mono" font-size="8" opacity="0.8" x="123" y="44">5°</text>
+<text fill="#c6c9ae" font-family="JetBrains Mono" font-size="8" opacity="0.8" x="123" y="70">2°</text>
+<text fill="#d5ef34" font-family="JetBrains Mono" font-size="8" font-weight="bold" x="123" y="96">1°</text>
+</svg>
+</div>
+<!-- Integrated Top Horizontal Tube Vial HUD -->
+<div class="absolute -top-7 px-3 py-1 rounded-full bg-surface-container-high/80 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] flex items-center gap-2">
+<span class="font-label-spatial text-label-spatial text-on-surface-variant font-bold">X</span>
+<!-- Miniature horizontal spirit vial track -->
+<div class="relative w-14 h-3 bg-surface-container-lowest/80 rounded-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-outline-variant/60"></div>
+<!-- Bubble -->
+<div class="w-4 h-2.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(213,239,52,0.9)] animate-pulse"></div>
+</div>
+<span class="font-metric-unit text-metric-unit text-primary-container font-semibold">0.0°</span>
+</div>
+<!-- Integrated Right Vertical Tube Vial HUD -->
+<div class="absolute -right-8 py-2 px-1 rounded-full bg-surface-container-high/80 backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col items-center gap-1.5">
+<span class="font-label-spatial text-label-spatial text-on-surface-variant font-bold">Y</span>
+<!-- Miniature vertical spirit vial track -->
+<div class="relative h-14 w-3 bg-surface-container-lowest/80 rounded-full flex flex-col items-center justify-center overflow-hidden">
+<div class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 bg-outline-variant/60"></div>
+<!-- Bubble slightly fluctuating -->
+<div class="h-4 w-2.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(213,239,52,0.9)] -translate-y-0.5"></div>
+</div>
+<span class="font-metric-unit text-metric-unit text-primary-container font-semibold">-0.1°</span>
+</div>
+<!-- Center Perfectly Calibrated Liquid Spirit Bubble Core -->
+<div class="relative z-20 w-24 h-24 rounded-full bg-[#DDF83D]/90 p-1 shadow-[0_0_32px_rgba(221,248,61,0.85),inset_0_2px_4px_rgba(255,255,255,0.9)] flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105 active:scale-95" id="spiritBubble">
+<!-- Specular Glow Highlight -->
+<div class="absolute top-2 left-3 w-5 h-2.5 rounded-full bg-white/80 rotate-[-25deg] blur-[0.5px] pointer-events-none"></div>
+<!-- Smoked Glass Pill Enclosing Readout for Razor Sharp Contrast -->
+<div class="px-3 py-1.5 rounded-full bg-[#111324]/90 backdrop-blur-[16px] border border-[#DDF83D]/50 shadow-[0_4px_16px_rgba(0,0,0,0.65)] flex flex-col items-center justify-center min-w-[70px]">
+<span class="font-metric-display-mobile text-[22px] leading-none text-[#DDF83D] font-extrabold tracking-tight">0.0°</span>
+<span class="font-label-spatial text-[10px] leading-tight text-[#F4F6FF] tracking-widest uppercase font-bold mt-0.5">LEVEL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Ergonomic Sliding HUD Sheet Container -->
+<div class="relative w-full -mt-10 z-30 bg-surface-container-low/90 backdrop-blur-2xl rounded-t-lg shadow-[0_-12px_40px_rgba(0,0,0,0.65)] px-margin pt-3 pb-6 flex flex-col gap-space-md">
+<!-- Tactile Drag Notch -->
+<div class="w-12 h-1 bg-outline-variant/60 rounded-full mx-auto"></div>
+<!-- Mode Selector Pills Horizontal Ribbon -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-1"><!-- Active Mode Pill in Electric Acid Lime #DDF83D with Deep Midnight Black text -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-[#DDF83D] text-[#111322] shadow-[0_0_18px_rgba(221,248,61,0.55)] flex items-center gap-1.5 transition-transform active:scale-95 whitespace-nowrap" type="button">
+<span class="material-symbols-outlined text-[18px] font-extrabold text-[#111322]">check</span>
+<span class="font-headline-sm text-headline-sm font-extrabold tracking-tight text-[#111322]">0.0° Degrees</span>
+</button>
+<!-- Secondary Pill: Roof Pitch -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-[#1c1e36]/65 backdrop-blur-[28px] border border-white/20 text-[#F4F6FF] hover:border-[#DDF83D]/40 transition-all active:scale-95 whitespace-nowrap" type="button">
+<span class="font-headline-sm text-headline-sm tracking-tight font-medium text-[#F4F6FF]">Roof Pitch (X:12)</span>
+</button>
+<!-- Secondary Pill: Sloped Angle -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-[#1c1e36]/65 backdrop-blur-[28px] border border-white/20 text-[#F4F6FF] hover:border-[#DDF83D]/40 transition-all active:scale-95 whitespace-nowrap" type="button">
+<span class="font-headline-sm text-headline-sm tracking-tight font-medium text-[#F4F6FF]">Sloped Angle</span>
+</button>
+<!-- Secondary Pill: Wall Picture Laser -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-[#1c1e36]/65 backdrop-blur-[28px] border border-white/20 text-[#F4F6FF] hover:border-[#DDF83D]/40 transition-all active:scale-95 whitespace-nowrap" type="button">
+<span class="font-headline-sm text-headline-sm tracking-tight font-medium text-[#F4F6FF]">Wall Picture Laser</span>
+</button>
+<!-- Secondary Pill: Hold / Freeze -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-[#1c1e36]/65 backdrop-blur-[28px] border border-white/20 text-[#F4F6FF] hover:border-[#DDF83D]/40 transition-all active:scale-95 whitespace-nowrap flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px] text-[#F4F6FF]">ac_unit</span>
+<span class="font-headline-sm text-headline-sm tracking-tight font-medium text-[#F4F6FF]">Hold / Freeze</span>
+</button>
+<!-- Secondary Pill: Sound Beep -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-[#1c1e36]/65 backdrop-blur-[28px] border border-white/20 text-[#F4F6FF] hover:border-[#DDF83D]/40 transition-all active:scale-95 whitespace-nowrap flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px] text-[#DDF83D]">graphic_eq</span>
+<span class="font-headline-sm text-headline-sm tracking-tight font-medium text-[#F4F6FF]">Sound Beep</span>
+</button></div>
+<!-- Sensor Precision Telemetry Status Strip -->
+<div class="w-full flex items-center justify-between px-space-md py-2 rounded-full bg-surface-container-high/60 backdrop-blur-md"><div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[#DDF83D] text-[16px]">sensors</span>
+<span class="font-label-spatial text-label-spatial text-[#F4F6FF] truncate font-medium">Surface: Vertical Wall</span>
+</div>
+<div class="w-1 h-3 bg-white/20 rounded-full shrink-0"></div>
+<div class="flex items-center gap-1 shrink-0">
+<span class="font-label-spatial text-label-spatial text-[#F4F6FF]/90 font-medium">Gyro 120Hz</span>
+</div>
+<div class="w-1 h-3 bg-white/20 rounded-full shrink-0"></div>
+<div class="flex items-center gap-1 shrink-0">
+<span class="font-label-spatial text-label-spatial text-[#DDF83D] font-bold">Tol: ±0.05°</span>
+</div></div>
+<!-- Primary Quick-Action Calibration Bar -->
+<div class="w-full h-14 rounded-full bg-surface-bright/30 backdrop-blur-xl shadow-[0_12px_28px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.25)] p-1.5 flex items-center justify-between gap-space-sm"><!-- Left Quick Add / Offset Circular Pod -->
+<button aria-label="Set custom angular offset" class="w-11 h-11 rounded-full bg-[#111322] text-[#DDF83D] flex items-center justify-center shadow-[0_0_12px_rgba(0,0,0,0.5)] border border-[#DDF83D]/40 transition-transform active:scale-90 shrink-0" id="btnOffset" type="button">
+<span class="material-symbols-outlined text-[24px] font-bold">add</span>
+</button>
+<!-- Center Action Trigger Button in Electric Acid Lime #DDF83D -->
+<button class="flex-1 h-11 rounded-full bg-[#DDF83D] text-[#111322] shadow-[0_0_24px_rgba(221,248,61,0.6)] flex items-center justify-center px-4 py-2 transition-transform active:scale-98" id="btnCalibrate" type="button">
+<span class="font-headline-sm text-headline-sm font-extrabold text-[#111322] tracking-wide truncate flex items-center gap-2">
+<span>Calibrate Zero (0.0°)</span>
+</span>
+</button>
+<!-- Right Trailing Directional Prompt -->
+<div class="w-11 h-11 rounded-full bg-[#111322]/80 border border-white/10 flex items-center justify-center shrink-0 text-[#DDF83D] shadow-[0_0_12px_rgba(221,248,61,0.25)] animate-pulse">
+<span class="material-symbols-outlined text-[22px] font-bold">keyboard_double_arrow_right</span>
+</div></div>
+</div>
+</div>
+<script>
+  (function() {
+    const spiritBubble = document.getElementById('spiritBubble');
+    const btnCalibrate = document.getElementById('btnCalibrate');
+    const btnHapticBeep = document.getElementById('btnHapticBeep');
+
+    // Micro-interaction: Zero Calibration Haptic Reaction
+    if (btnCalibrate && spiritBubble) {
+      btnCalibrate.addEventListener('click', function() {
+        spiritBubble.style.transform = 'scale(0.88)';
+        setTimeout(() => {
+          spiritBubble.style.transform = 'scale(1.1)';
+        }, 120);
+        setTimeout(() => {
+          spiritBubble.style.transform = 'scale(1)';
+        }, 280);
+
+        if (navigator.vibrate) {
+          navigator.vibrate([30, 40, 30]);
+        }
+      });
+    }
+
+    // Toggle Beep Audio State
+    if (btnHapticBeep) {
+      let active = true;
+      btnHapticBeep.addEventListener('click', function() {
+        active = !active;
+        const icon = btnHapticBeep.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = active ? 'volume_up' : 'volume_off';
+          btnHapticBeep.classList.toggle('text-primary-container', active);
+          btnHapticBeep.classList.toggle('text-on-surface-variant', !active);
+        }
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/80 backdrop-blur-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.4)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-20 px-space-sm relative border-t border-white/10 bg-[#0d0f1f]/85 backdrop-blur-2xl">
+<!-- Tab 1: Hub -->
+<a class="flex flex-col items-center justify-center gap-1 min-w-[60px] min-h-[44px] py-1 text-[#F4F6FF]/70 transition-all hover:text-[#F4F6FF]" data-path="hub" href="#">
+<span class="material-symbols-outlined text-[24px]">grid_view</span>
+<span class="font-body-sm text-[12px] tracking-tight">Hub</span>
+</a>
+<!-- Tab 2: AR Tape -->
+<a class="flex flex-col items-center justify-center gap-1 min-w-[60px] min-h-[44px] py-1 text-[#F4F6FF]/70 transition-all hover:text-[#F4F6FF]" data-path="ar-tape" href="#">
+<span class="material-symbols-outlined text-[24px]">straighten</span>
+<span class="font-body-sm text-[12px] tracking-tight">AR Tape</span>
+</a>
+<!-- Tab 3: Blueprints -->
+<a class="flex flex-col items-center justify-center gap-1 min-w-[60px] min-h-[44px] py-1 text-[#F4F6FF]/70 transition-all hover:text-[#F4F6FF]" data-path="blueprints" href="#">
+<span class="material-symbols-outlined text-[24px]">architecture</span>
+<span class="font-body-sm text-[12px] tracking-tight">Blueprints</span>
+</a>
+<!-- Tab 4: Tools (Active) -->
+<a class="flex flex-col items-center justify-center gap-1 min-w-[60px] min-h-[44px] py-1 text-[#DDF83D] transition-all relative" data-path="tools" href="#">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#DDF83D]/15 shadow-[0_0_12px_rgba(221,248,61,0.3)]">
+<span class="material-symbols-outlined text-[24px] font-bold text-[#DDF83D]">construction</span>
+</div>
+<span class="font-body-sm text-[12px] tracking-tight font-extrabold text-[#DDF83D]">Tools</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#DDF83D] shadow-[0_0_8px_#DDF83D] mt-0.5"></span>
+</a>
+<!-- Tab 5: AI Advisor -->
+<a class="flex flex-col items-center justify-center gap-1 min-w-[60px] min-h-[44px] py-1 text-[#F4F6FF]/70 transition-all hover:text-[#F4F6FF]" data-path="ai-advisor" href="#">
+<span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+<span class="font-body-sm text-[12px] tracking-tight">AI Advisor</span>
+</a>
+</div></nav></body></html>

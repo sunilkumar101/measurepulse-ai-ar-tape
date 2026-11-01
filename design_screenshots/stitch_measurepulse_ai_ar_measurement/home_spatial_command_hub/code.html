@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>MeasurePulse AI - Spatial Command Hub</title>
+<!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700;1,800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            lime: {
+              DEFAULT: '#DDF83D',
+              glow: '#ddf83d99',
+            },
+            midnight: '#111322',
+            surface: {
+              card: 'rgba(28, 30, 54, 0.58)',
+              glass: 'rgba(255, 255, 255, 0.12)',
+              pill: 'rgba(255, 255, 255, 0.14)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #111324;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* True Frosted Glass Specifications */
+    .glass-frosted-card {
+      background: rgba(28, 30, 54, 0.58);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 28px;
+    }
+
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      white-space: nowrap;
+    }
+
+    .glass-card-overlay {
+      background: rgba(20, 23, 44, 0.65);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .glass-nav-bar {
+      background: rgba(24, 26, 44, 0.85);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-top: 1px solid rgba(255, 255, 255, 0.20);
+    }
+
+    /* 3D Iridescent Orb styling */
+    .ai-orb-nav {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #d896ff 25%, #8b5cf6 55%, #3b82f6 80%, #1e1b4b 100%);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.8), inset 0 -2px 5px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .ai-orb-nav::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      width: 6px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      filter: blur(0.5px);
+    }
+
+    /* Hide scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-gradient-to-b from-[#272446] via-[#1C1E36] to-[#111324] text-white selection:bg-[#DDF83D] selection:text-[#111322] relative pb-28">
+<!-- Ambient Twilight Atmospheric Glow Orbs -->
+<div class="fixed -top-16 -right-16 w-80 h-80 rounded-full bg-purple-600/25 blur-[100px] pointer-events-none z-0"></div>
+<div class="fixed top-80 -left-20 w-72 h-72 rounded-full bg-indigo-500/20 blur-[90px] pointer-events-none z-0"></div>
+<div class="fixed bottom-40 right-0 w-64 h-64 rounded-full bg-[#ddf83d]/10 blur-[85px] pointer-events-none z-0"></div>
+<!-- iOS / Mobile Status Bar Area (Full-bleed padding) -->
+<div class="relative z-20 flex justify-between items-center px-6 pt-3.5 pb-2 text-xs font-semibold tracking-tight text-white/90">
+<span class="font-mono text-sm tracking-normal">9:41</span>
+<div class="flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l.64-.64C7.93 20.26 9.88 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7 0-1.66.58-3.18 1.55-4.39l9.84 9.84C15.18 18.42 13.66 19 12 19z"></path></svg>
+<span class="text-[10px] font-mono tracking-wider text-lime font-bold">5G</span>
+<div class="w-5 h-2.5 border border-white/70 rounded-[3px] p-[1px] flex items-center">
+<div class="w-3/4 h-full bg-white rounded-[1px]"></div>
+</div>
+</div>
+</div>
+<!-- Main Full-Bleed Content Container -->
+<main class="relative z-10 px-5 pt-2 flex flex-col">
+<!-- 1. Top Header Row: Branding, Depth Status, PRO Badge, Notification -->
+<header class="flex justify-between items-center mb-5">
+<!-- Left: Studio Avatar & Status -->
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-12 h-12 rounded-full ring-2 ring-white/20 p-0.5 overflow-hidden bg-gradient-to-tr from-[#3b82f6] to-[#a855f7] shadow-lg">
+<img alt="MeasurePulse Studio" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+</div>
+<!-- Spatial Active Sensor Dot -->
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#DDF83D] border-2 border-[#1C1E36] rounded-full shadow-[0_0_8px_#DDF83D]"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#DDF83D] animate-pulse"></span>
+<span class="text-[10px] font-semibold text-white/70 tracking-wider uppercase font-mono">ARCore Depth Active</span>
+</div>
+<div class="flex items-center gap-2">
+<h1 class="text-base font-bold text-white tracking-tight">MeasurePulse AI</h1>
+<!-- Deep Midnight Black Contrast on PRO Badge -->
+<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-[#DDF83D] text-[#111322] font-black text-[10px] tracking-wide shadow-[0_0_10px_rgba(221,248,61,0.55)]">
+<span class="material-symbols-outlined text-[12px] font-black leading-none text-[#111322]">bolt</span>
+              PRO
+            </span>
+</div>
+</div>
+</div>
+<!-- Right: Frosted Glass Notification Bell Button -->
+<button aria-label="Notifications" class="relative w-11 h-11 rounded-full glass-surface flex items-center justify-center hover:bg-white/20 transition-all active:scale-95 shadow-md group">
+<svg class="w-5 h-5 text-white/90 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#FF3B82] shadow-[0_0_6px_#FF3B82]"></span>
+</button>
+</header>
+<!-- 2. Editorial Hero Title -->
+<div class="mb-4">
+<h2 class="text-[30px] leading-[1.12] font-semibold italic text-white tracking-tight">
+        Seamless Spatial<br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/95 to-white/70">Measurement</span>
+</h2>
+</div>
+<!-- 3. Horizontal Filter Pills Row -->
+<div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-1 mb-5 -mx-5 px-5">
+<!-- Pill 1 (Active): Solid Electric Acid Lime (#DDF83D) with midnight text -->
+<button class="flex-shrink-0 px-4 py-2 rounded-full bg-[#DDF83D] text-[#111322] font-extrabold text-xs flex items-center gap-1.5 shadow-[0_0_16px_rgba(221,248,61,0.4)] ring-2 ring-[#DDF83D]/40 ring-offset-2 ring-offset-[#1c1e36] transition-transform active:scale-95">
+<span class="w-1.5 h-1.5 rounded-full bg-[#111322]"></span>
+<span>All</span>
+</button>
+<!-- Pill 2: 3D AR Tape -->
+<button class="flex-shrink-0 px-4 py-2 rounded-full glass-pill text-white/90 hover:text-white hover:bg-white/20 text-xs font-semibold transition-all active:scale-95 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-white/80">straighten</span>
+<span>3D AR Tape</span>
+</button>
+<!-- Pill 3: Floorplans -->
+<button class="flex-shrink-0 px-4 py-2 rounded-full glass-pill text-white/90 hover:text-white hover:bg-white/20 text-xs font-semibold transition-all active:scale-95 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-white/80">floor</span>
+<span>Floorplans</span>
+</button>
+<!-- Pill 4: Level & Caliper -->
+<button class="flex-shrink-0 px-4 py-2 rounded-full glass-pill text-white/90 hover:text-white hover:bg-white/20 text-xs font-semibold transition-all active:scale-95 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-white/80">square_foot</span>
+<span>Level &amp; Caliper</span>
+</button>
+</div>
+<!-- 4. Section Title Row -->
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+<span>Featured Spatial Scans</span>
+<span class="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-mono text-white/70">8 Ready</span>
+</h3>
+<button class="text-xs font-semibold text-white/60 hover:text-[#DDF83D] transition-colors flex items-center gap-1">
+<span>View All</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<!-- 5. Main Hero Frosted Glass Card (Living Room & TV Wall Scan) -->
+<div class="glass-frosted-card overflow-hidden shadow-2xl group transition-all duration-300 hover:border-white/40 mb-6">
+<!-- Twilight Architectural Villa Photography -->
+<div class="relative h-[230px] w-full overflow-hidden bg-[#181A2C]">
+<img alt="Modern Luxury Living Room OLED Wall Setup" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#101223] via-black/20 to-black/40"></div>
+<!-- Floating Pills inside Card -->
+<div class="absolute top-3.5 left-3.5 flex flex-wrap items-center gap-2 z-10">
+<span class="px-2.5 py-1 rounded-full glass-pill text-[10px] font-bold text-white tracking-wide uppercase flex items-center gap-1 shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] text-cyan-300">view_in_ar</span>
+            3D AR
+          </span>
+<span class="px-2.5 py-1 rounded-full glass-pill text-[10px] font-semibold text-white/90 whitespace-nowrap">
+            4 Walls
+          </span>
+<!-- PRO / Electric Lime Badge with Deep Midnight Text -->
+<span class="px-3 py-1 rounded-full bg-[#DDF83D] text-[#111322] font-black text-[11px] font-mono shadow-[0_0_14px_rgba(221,248,61,0.55)] whitespace-nowrap">
+            24.8 m² Blueprint
+          </span>
+</div>
+<!-- Pin / Heart Button -->
+<button class="absolute top-3.5 right-3.5 w-9 h-9 rounded-full glass-surface flex items-center justify-center text-white/90 hover:text-white hover:bg-white/25 active:scale-90 transition-all z-10 shadow-md">
+<span class="material-symbols-outlined text-[18px] text-white/90 hover:text-rose-400">favorite</span>
+</button>
+</div>
+<!-- Bottom Frosted Glass Overlay Band -->
+<div class="glass-card-overlay p-4 flex flex-col gap-1.5">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-base font-bold text-white tracking-tight">Living Room 75" TV Wall &amp; Lounge</h4>
+<div class="flex items-center gap-1.5 text-xs text-white/70 font-mono mt-0.5 whitespace-nowrap">
+<svg class="w-3.5 h-3.5 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>5.80m × 4.25m • Ceiling 3.10m</span>
+</div>
+</div>
+<!-- Arrow Action Button -->
+<button class="w-9 h-9 rounded-full glass-surface flex items-center justify-center text-white hover:bg-[#DDF83D] hover:text-[#111322] hover:border-[#DDF83D] active:scale-95 transition-all shadow-md group/btn flex-shrink-0 ml-2">
+<svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<!-- Metric & Verification -->
+<div class="flex items-center justify-between pt-1 border-t border-white/10 mt-1">
+<span class="text-[11px] font-mono font-medium text-[#FACC15] flex items-center gap-1 whitespace-nowrap">
+<span>★</span>
+<span class="font-sans font-semibold text-white/90">±1mm Laser Verified</span>
+</span>
+<span class="text-[10px] font-mono text-white/50 whitespace-nowrap">Mesh 99.8% Sync</span>
+</div>
+</div>
+</div>
+<!-- 6. Recent Blueprints Section with Clipping Prevention (min-w-[200px] + whitespace-nowrap) -->
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+<span>Recent Blueprints</span>
+<span class="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-mono text-white/70">4 Active</span>
+</h3>
+<span class="text-[11px] font-mono text-white/50">Swipe →</span>
+</div>
+<div class="flex items-stretch gap-3 overflow-x-auto no-scrollbar pb-3 -mx-5 px-5 mb-6">
+<!-- Card A: Master Suite -->
+<div class="min-w-[210px] max-w-[220px] flex-shrink-0 glass-frosted-card overflow-hidden shadow-xl flex flex-col group">
+<div class="relative h-[115px] w-full bg-[#181A2C] overflow-hidden">
+<img alt="Master Suite" class="w-full h-full object-cover object-left group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#101223] via-transparent to-black/30"></div>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-[#DDF83D] text-[#111322] font-black text-[9px] font-mono shadow whitespace-nowrap">
+            31.2 m²
+          </span>
+<span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full glass-pill text-[9px] font-mono text-white/90 whitespace-nowrap">
+            4.6m × 5.4m
+          </span>
+</div>
+<div class="p-3.5 flex flex-col justify-between flex-1 bg-surface-card">
+<div>
+<h5 class="text-xs font-bold text-white tracking-tight whitespace-nowrap truncate">Master Suite &amp; Terrace</h5>
+<p class="text-[10px] font-mono text-white/60 mt-0.5 whitespace-nowrap">Ceiling 2.85m • 5 Walls</p>
+</div>
+<div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between">
+<span class="text-[10px] font-mono text-[#DDF83D] font-semibold whitespace-nowrap">Mesh 99.8%</span>
+<span class="material-symbols-outlined text-[15px] text-white/60 group-hover:text-white transition-colors">arrow_outward</span>
+</div>
+</div>
+</div>
+<!-- Card B: Kitchen Island -->
+<div class="min-w-[210px] max-w-[220px] flex-shrink-0 glass-frosted-card overflow-hidden shadow-xl flex flex-col group">
+<div class="relative h-[115px] w-full bg-[#181A2C] overflow-hidden">
+<img alt="Kitchen Studio" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#101223] via-transparent to-black/30"></div>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-[#DDF83D] text-[#111322] font-black text-[9px] font-mono shadow whitespace-nowrap">
+            18.4 m²
+          </span>
+<span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full glass-pill text-[9px] font-mono text-white/90 whitespace-nowrap">
+            3.8m × 7.2m
+          </span>
+</div>
+<div class="p-3.5 flex flex-col justify-between flex-1 bg-surface-card">
+<div>
+<h5 class="text-xs font-bold text-white tracking-tight whitespace-nowrap truncate">Modern Studio &amp; Kitchen</h5>
+<p class="text-[10px] font-mono text-white/60 mt-0.5 whitespace-nowrap">Island Offset • 3 Plugs</p>
+</div>
+<div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between">
+<span class="text-[10px] font-mono text-[#DDF83D] font-semibold whitespace-nowrap">Laser ±1mm</span>
+<span class="material-symbols-outlined text-[15px] text-white/60 group-hover:text-white transition-colors">arrow_outward</span>
+</div>
+</div>
+</div>
+<!-- Card C: Executive Office / Terrace -->
+<div class="min-w-[210px] max-w-[220px] flex-shrink-0 glass-frosted-card overflow-hidden shadow-xl flex flex-col group">
+<div class="relative h-[115px] w-full bg-[#181A2C] overflow-hidden">
+<img alt="Terrace Balcony" class="w-full h-full object-cover object-right group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#101223] via-transparent to-black/30"></div>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-[#DDF83D] text-[#111322] font-black text-[9px] font-mono shadow whitespace-nowrap">
+            14.2 m²
+          </span>
+<span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full glass-pill text-[9px] font-mono text-white/90 whitespace-nowrap">
+            3.2m × 4.4m
+          </span>
+</div>
+<div class="p-3.5 flex flex-col justify-between flex-1 bg-surface-card">
+<div>
+<h5 class="text-xs font-bold text-white tracking-tight whitespace-nowrap truncate">Sky Terrace &amp; Balcony</h5>
+<p class="text-[10px] font-mono text-white/60 mt-0.5 whitespace-nowrap">Glazing Run • 1.1m Rail</p>
+</div>
+<div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between">
+<span class="text-[10px] font-mono text-[#DDF83D] font-semibold whitespace-nowrap">CAD Exported</span>
+<span class="material-symbols-outlined text-[15px] text-white/60 group-hover:text-white transition-colors">arrow_outward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 7. Quick Measurement Tools Grid -->
+<div class="mb-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-sm font-bold text-white tracking-tight">Precision AR Utilities</h3>
+<span class="text-[11px] font-mono text-lime">LiDAR Calibrated</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tool 1 -->
+<button class="glass-frosted-card p-3.5 flex items-center gap-3 text-left hover:border-white/40 active:scale-98 transition-all">
+<div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0 text-[#DDF83D]">
+<span class="material-symbols-outlined text-[20px]">straighten</span>
+</div>
+<div>
+<div class="text-xs font-bold text-white">Live AR Tape</div>
+<div class="text-[10px] font-mono text-white/60">Point-to-point 3D</div>
+</div>
+</button>
+<!-- Tool 2 -->
+<button class="glass-frosted-card p-3.5 flex items-center gap-3 text-left hover:border-white/40 active:scale-98 transition-all">
+<div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0 text-cyan-300">
+<span class="material-symbols-outlined text-[20px]">grid_4x4</span>
+</div>
+<div>
+<div class="text-xs font-bold text-white">Surface Caliper</div>
+<div class="text-[10px] font-mono text-white/60">Pitch &amp; angle plane</div>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- 8. Fixed Standardized Frosted Glass Bottom Navigation Bar (5 Tabs) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 glass-nav-bar px-3 pt-2.5 pb-6">
+<div class="max-w-md mx-auto flex items-center justify-around">
+<!-- 1. Hub (Home - ACTIVE in Electric Lime #DDF83D) -->
+<button aria-label="Spatial Hub" class="flex flex-col items-center gap-1 group py-1 px-2.5 relative transition-transform active:scale-95">
+<div class="relative flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px] text-[#DDF83D] drop-shadow-[0_0_8px_rgba(221,248,61,0.7)] font-bold">roofing</span>
+</div>
+<span class="text-[10px] font-bold text-[#DDF83D] tracking-tight">Hub</span>
+<!-- Active indicator pip -->
+<span class="w-1 h-1 rounded-full bg-[#DDF83D] shadow-[0_0_6px_#DDF83D]"></span>
+</button>
+<!-- 2. AR Tape -->
+<button aria-label="AR Tape" class="flex flex-col items-center gap-1 group py-1 px-2.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors">straighten</span>
+<span class="text-[10px] font-medium text-white/60 group-hover:text-white transition-colors">AR Tape</span>
+<span class="w-1 h-1 rounded-full bg-transparent"></span>
+</button>
+<!-- 3. Blueprints -->
+<button aria-label="Blueprints" class="flex flex-col items-center gap-1 group py-1 px-2.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors">floor</span>
+<span class="text-[10px] font-medium text-white/60 group-hover:text-white transition-colors">Blueprints</span>
+<span class="w-1 h-1 rounded-full bg-transparent"></span>
+</button>
+<!-- 4. Tools -->
+<button aria-label="Tools" class="flex flex-col items-center gap-1 group py-1 px-2.5 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors">square_foot</span>
+<span class="text-[10px] font-medium text-white/60 group-hover:text-white transition-colors">Tools</span>
+<span class="w-1 h-1 rounded-full bg-transparent"></span>
+</button>
+<!-- 5. AI Advisor (Iridescent AI Orb) -->
+<button aria-label="AI Advisor" class="flex flex-col items-center gap-1 group py-1 px-2.5 transition-transform active:scale-95">
+<div class="ai-orb-nav"></div>
+<span class="text-[10px] font-semibold text-white/90 group-hover:text-white transition-colors">AI Advisor</span>
+<span class="w-1 h-1 rounded-full bg-transparent"></span>
+</button>
+</div>
+</nav>
+</body></html>

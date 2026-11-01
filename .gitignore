@@ -1,0 +1,50 @@
+# Reference repos (read-only inspiration, never shipped)
+/reference_repos/
+
+# Remotion promo video
+/promo-video/node_modules/
+/promo-video/out/
+
+# Android / Gradle build output
+/build/
+**/build/
+.gradle/
+local.properties
+.kotlin/
+*.apk
+*.aab
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing keys & secrets — NEVER commit
+*.jks
+*.keystore
+keystore.properties
+*service-account*.json
+google-services.json
+
+# IDE / OS
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Upload keystore folder + credentials backup
+/keystore/
+KEYSTORE_CREDENTIALS.txt
+
+# Fastlane runtime files
+fastlane/report.xml
+fastlane/README.md
+fastlane/play-service-account.json
+
+# Local logs
+*.log
+
+# Tool caches (Remotion/webpack)
+.cache/
+
+# Installed third-party agent skills (reinstall from skills-lock.json)
+/.agents/
+/.claude/skills/

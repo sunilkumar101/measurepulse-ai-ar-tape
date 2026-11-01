@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="mobile_tab" name="shell-type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "twilight-start": "#272446",
+            "twilight-mid": "#1C1E36",
+            "twilight-end": "#111324",
+            "electric-lime": "#DDF83D",
+            "midnight-black": "#111322",
+            "glass-card": "rgba(28, 30, 54, 0.58)",
+            "glass-pill": "rgba(28, 30, 54, 0.65)",
+            "glass-rim": "rgba(255, 255, 255, 0.22)",
+            "text-bright": "#F4F6FF",
+            "text-muted": "#9BA3C6"
+          },
+          fontFamily: {
+            "headline": ["Plus Jakarta Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        background-color: #111324;
+        color: #F4F6FF;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      .pt-safe {
+        padding-top: env(safe-area-inset-top, 0px);
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .frosted-glass-card {
+      background: rgba(28, 30, 54, 0.58);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .frosted-glass-pill {
+      background: rgba(28, 30, 54, 0.65);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+    .frosted-dark-pill {
+      background: rgba(17, 19, 34, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .frosted-glass-tray {
+      background: rgba(28, 30, 54, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+    }
+  </style>
+</head>
+<body class="bg-[#111324] font-headline text-text-bright antialiased flex flex-col min-h-screen">
+<!-- Dynamic Twilight Background Gradient -->
+<div class="fixed inset-0 bg-gradient-to-b from-twilight-start via-twilight-mid to-twilight-end pointer-events-none -z-20"></div>
+<div class="fixed top-12 left-1/4 w-80 h-80 bg-purple-900/25 rounded-full blur-[110px] pointer-events-none -z-10"></div>
+<div class="fixed top-96 right-[-20px] w-72 h-72 bg-[#DDF83D]/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<!-- Top App Bar -->
+<header class="fixed top-0 inset-x-0 z-50 pt-safe bg-[#1C1E36]/70 backdrop-blur-xl border-b border-white/10">
+<div class="h-16 px-4 flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded-xl bg-electric-lime flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(221,248,61,0.4)]">
+<span class="material-symbols-outlined text-midnight-black text-[20px] font-bold">view_in_ar</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline text-[15px] font-bold text-text-bright tracking-tight leading-tight truncate">MeasurePulse AI</span>
+<span class="font-mono text-[10px] tracking-wider text-electric-lime uppercase font-semibold">Projects Library</span>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<div class="flex items-center gap-1.5 frosted-glass-pill px-2.5 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-electric-lime animate-pulse"></span>
+<span class="font-mono text-[11px] text-text-bright font-medium">LiDAR 60 FPS</span>
+</div>
+<div class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-text-bright shrink-0">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex flex-col relative w-full pt-20 pb-28 px-4">
+<!-- Header Section -->
+<div class="flex items-start justify-between pt-2 pb-4">
+<div>
+<h1 class="font-headline text-[32px] italic font-extrabold text-white tracking-tight leading-[1.08]">
+          Saved Spatial<br/>Projects
+        </h1>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-electric-lime animate-ping"></span>
+<p class="font-mono text-[11px] text-text-muted uppercase tracking-widest font-medium">
+            CAD Sync Active • Cloud V4.2
+          </p>
+</div>
+</div>
+<!-- Action Buttons (Add & Search) -->
+<div class="flex items-center gap-2 mt-1">
+<button aria-label="New Scan Project" class="w-11 h-11 rounded-full bg-electric-lime text-midnight-black flex items-center justify-center font-bold shadow-[0_0_20px_rgba(221,248,61,0.45)] transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[22px] font-bold">add</span>
+</button>
+<button aria-label="Search Projects" class="w-11 h-11 rounded-full frosted-glass-pill flex items-center justify-center text-text-bright transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+</div>
+<!-- Filter Pills Row -->
+<div class="flex items-center gap-2.5 overflow-x-auto pb-4 pt-1 no-scrollbar -mx-4 px-4">
+<!-- Active Filter Pill (Solid Electric Acid Lime + Midnight Black text) -->
+<button class="shrink-0 px-4 py-2 rounded-full bg-electric-lime text-midnight-black font-headline text-[13px] font-bold shadow-[0_0_18px_rgba(221,248,61,0.35)] transition-transform active:scale-95 flex items-center gap-1.5 whitespace-nowrap">
+<span class="material-symbols-outlined text-[15px] font-bold">folder_check</span>
+<span>All Scans (12)</span>
+</button>
+<!-- Inactive Filter Pills (Smoked Frosted Glass) -->
+<button class="shrink-0 px-4 py-2 rounded-full frosted-glass-pill text-text-bright font-headline text-[13px] font-medium transition-all active:scale-95 whitespace-nowrap hover:bg-white/10">
+        Floorplans
+      </button>
+<button class="shrink-0 px-4 py-2 rounded-full frosted-glass-pill text-text-bright font-headline text-[13px] font-medium transition-all active:scale-95 whitespace-nowrap hover:bg-white/10">
+        AR Fit Checks
+      </button>
+<button class="shrink-0 px-4 py-2 rounded-full frosted-glass-pill text-text-bright font-headline text-[13px] font-medium transition-all active:scale-95 whitespace-nowrap hover:bg-white/10">
+        CAD Exports
+      </button>
+<button class="shrink-0 px-4 py-2 rounded-full frosted-glass-pill text-text-bright font-headline text-[13px] font-medium transition-all active:scale-95 whitespace-nowrap hover:bg-white/10">
+        LiDAR Raw Meshes
+      </button>
+</div>
+<!-- Stacked Card Deck Gallery -->
+<div class="flex flex-col gap-6 mt-1">
+<!-- Card 1: Master Suite & Infinity Terrace -->
+<article class="relative w-full rounded-[28px] overflow-hidden frosted-glass-card shadow-2xl group transition-all duration-300">
+<!-- Visual Container with wireframe grid & image -->
+<div class="relative h-[230px] w-full overflow-hidden">
+<img alt="Master Suite Penthouse architectural interior" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-twilight-end/95 via-twilight-mid/30 to-black/50 pointer-events-none"></div>
+<!-- Subtle AR Spatial Wireframe Overlay Indicator -->
+<div class="absolute inset-0 bg-[radial-gradient(rgba(221,248,61,0.12)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+<!-- Top Floating Telemetry & Bookmark Pill Cluster -->
+<div class="relative z-10 p-3.5 flex items-start justify-between gap-2">
+<div class="flex flex-wrap items-center gap-1.5 max-w-[82%]">
+<!-- High-Contrast Status Pill in Electric Lime -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-electric-lime text-midnight-black font-mono text-[11px] font-bold shadow-[0_0_12px_rgba(221,248,61,0.4)] whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] font-bold">architecture</span>
+                24.8 m² Blueprint
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full frosted-dark-pill text-text-bright font-mono text-[11px] whitespace-nowrap">
+<span class="w-1.5 h-1.5 rounded-full bg-electric-lime"></span>
+                4 Walls
+              </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full frosted-dark-pill text-text-bright font-mono text-[11px] whitespace-nowrap">
+                68.2 m³
+              </span>
+</div>
+<button aria-label="Favorite Project" class="w-9 h-9 rounded-full frosted-dark-pill flex items-center justify-center text-text-bright transition-all active:scale-90 hover:bg-white/10 shrink-0">
+<span class="material-symbols-outlined text-[18px] text-electric-lime" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Floating Precision Tag Bottom-Right of photo -->
+<div class="absolute right-3.5 bottom-3.5 z-10">
+<span class="px-2.5 py-0.5 rounded-full bg-electric-lime text-midnight-black font-mono text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              ±1mm LASER VERIFIED
+            </span>
+</div>
+</div>
+<!-- Frosted Glass Card Body Tray -->
+<div class="p-4 frosted-glass-tray flex flex-col gap-3">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0 flex-1">
+<h2 class="font-headline text-[17px] font-bold text-white tracking-tight truncate">
+                Master Suite &amp; Infinity Terrace
+              </h2>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-mono text-[11px] text-text-muted truncate">
+                  76 Tiles • 14.5L Paint • 1.5T AC
+                </span>
+<span class="w-1 h-1 rounded-full bg-electric-lime shrink-0"></span>
+<span class="font-mono text-[11px] text-electric-lime shrink-0 font-semibold uppercase">CALIBRATED</span>
+</div>
+</div>
+<button aria-label="Open Project" class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0 shadow-md transition-all active:scale-90 hover:bg-electric-lime hover:text-midnight-black group-hover:border-electric-lime/50">
+<span class="material-symbols-outlined text-[19px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">arrow_outward</span>
+</button>
+</div>
+<!-- Metrics Row & Quick CAD/AR Actions -->
+<div class="pt-2 border-t border-white/10 flex items-center justify-between text-text-muted">
+<div class="flex items-center gap-3 font-mono text-[11px]">
+<div><span class="text-white font-semibold">24.8</span> m² Area</div>
+<span class="text-white/20">|</span>
+<div><span class="text-white font-semibold">2.75</span>m Ceiling</div>
+<span class="text-white/20">|</span>
+<div class="text-electric-lime font-medium">Mesh 99.8%</div>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<button class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-text-bright hover:bg-white/20 transition-all text-[14px]" title="Export CAD">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+</button>
+<button class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-electric-lime hover:bg-white/20 transition-all text-[14px]" title="Open AR View">
+<span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2: Living Room 75" TV & Sofa Check -->
+<article class="relative w-full rounded-[28px] overflow-hidden frosted-glass-card shadow-2xl group transition-all duration-300">
+<!-- Visual Container with wireframe grid & image -->
+<div class="relative h-[230px] w-full overflow-hidden">
+<img alt="Penthouse living room TV and modular sofa check" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1VkcCF_TkAt3BIPLQDF1ZnYKz2pjJRMG1SAG3i52M7f40wB1Py0wu62__mwJG9plY_-88P-Wz-AZSXsByQRa91lHk85eTEgLno7rjHrDf_wiZepQxOawDfCg7ssKvr18_Z2XGI_-BSDgJl-ifHjYIMA-GNs8Q9D8AFPA_BoQSjU83Y05WX2VIMmzjcuVCLfGTlwPN1A01a3ZWuYyAEkssppmAJL9rUtd00Niryd2Brl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-twilight-end/95 via-twilight-mid/30 to-black/50 pointer-events-none"></div>
+<!-- Subtle AR Spatial Wireframe Overlay Indicator -->
+<div class="absolute inset-0 bg-[radial-gradient(rgba(221,248,61,0.12)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+<!-- Top Floating Telemetry & Bookmark Pill Cluster -->
+<div class="relative z-10 p-3.5 flex items-start justify-between gap-2">
+<div class="flex flex-wrap items-center gap-1.5 max-w-[82%]">
+<!-- High-Contrast Status Pill in Electric Lime -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-electric-lime text-midnight-black font-mono text-[11px] font-bold shadow-[0_0_12px_rgba(221,248,61,0.4)] whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] font-bold">check_circle</span>
+                Fits +14cm Clearance
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full frosted-dark-pill text-text-bright font-mono text-[11px] whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] text-electric-lime">view_in_ar</span>
+                3D Box Fit
+              </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full frosted-dark-pill text-text-bright font-mono text-[11px] whitespace-nowrap">
+                3.4m Distance
+              </span>
+</div>
+<button aria-label="Bookmark Project" class="w-9 h-9 rounded-full frosted-dark-pill flex items-center justify-center text-text-bright transition-all active:scale-90 hover:bg-white/10 shrink-0">
+<span class="material-symbols-outlined text-[18px] text-electric-lime" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<!-- Floating Precision Tag Bottom-Right of photo -->
+<div class="absolute right-3.5 bottom-3.5 z-10">
+<span class="px-2.5 py-0.5 rounded-full bg-electric-lime text-midnight-black font-mono text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              3D BLUEPRINT
+            </span>
+</div>
+</div>
+<!-- Frosted Glass Card Body Tray -->
+<div class="p-4 frosted-glass-tray flex flex-col gap-3">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0 flex-1">
+<h2 class="font-headline text-[17px] font-bold text-white tracking-tight truncate">
+                Living Room 75" TV &amp; Sofa Check
+              </h2>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-mono text-[11px] text-text-muted truncate">
+                  W: 242 cm × D: 95 cm • Verified
+                </span>
+<span class="w-1 h-1 rounded-full bg-electric-lime shrink-0"></span>
+<span class="font-mono text-[11px] text-electric-lime shrink-0 font-semibold uppercase">Fit Approved</span>
+</div>
+</div>
+<button aria-label="Open Project" class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0 shadow-md transition-all active:scale-90 hover:bg-electric-lime hover:text-midnight-black group-hover:border-electric-lime/50">
+<span class="material-symbols-outlined text-[19px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">arrow_outward</span>
+</button>
+</div>
+<!-- Metrics Row & Quick CAD/AR Actions -->
+<div class="pt-2 border-t border-white/10 flex items-center justify-between text-text-muted">
+<div class="flex items-center gap-3 font-mono text-[11px]">
+<div><span class="text-white font-semibold">38.4</span> m² Room</div>
+<span class="text-white/20">|</span>
+<div><span class="text-white font-semibold">75"</span> Screen</div>
+<span class="text-white/20">|</span>
+<div class="text-electric-lime font-medium">Pass 100%</div>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<button class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-text-bright hover:bg-white/20 transition-all text-[14px]" title="Export CAD">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+</button>
+<button class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-electric-lime hover:bg-white/20 transition-all text-[14px]" title="Open AR View">
+<span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3: Penthouse Kitchen Studio -->
+<article class="relative w-full rounded-[28px] overflow-hidden frosted-glass-card shadow-2xl group transition-all duration-300">
+<!-- Visual Container with wireframe grid & image -->
+<div class="relative h-[230px] w-full overflow-hidden">
+<img alt="Penthouse Kitchen Studio modern interior" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1XmiXF8CFB_dKVJscNsg_sCfLql4G-wGcw74-kBAivSFuur37XLAoEwUeOPhKXvkiSiNEMmS458H26RkbKwn1mT6jsX5Q72W9eQFEqQ7tvwb2QFw9VdFSor_WZYvkASDEQ17z8PxLhuLho6Gs_jPw8vD9k76l3u45Bkx9ES9R4KRt5vilIkbWDZV6R0NmGhHnUkZ7Y6ZrjV49HyY1xZl500y4y4Dcl4IeBDW69BiBF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-twilight-end/95 via-twilight-mid/30 to-black/50 pointer-events-none"></div>
+<!-- Subtle AR Spatial Wireframe Overlay Indicator -->
+<div class="absolute inset-0 bg-[radial-gradient(rgba(221,248,61,0.12)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+<!-- Top Floating Telemetry & Bookmark Pill Cluster -->
+<div class="relative z-10 p-3.5 flex items-start justify-between gap-2">
+<div class="flex flex-wrap items-center gap-1.5 max-w-[82%]">
+<!-- High-Contrast Status Pill in Electric Lime -->
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-electric-lime text-midnight-black font-mono text-[11px] font-bold shadow-[0_0_12px_rgba(221,248,61,0.4)] whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] font-bold">countertops</span>
+                18.6 m² Island Fit
+              </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full frosted-dark-pill text-text-bright font-mono text-[11px] whitespace-nowrap">
+<span class="w-1.5 h-1.5 rounded-full bg-electric-lime"></span>
+                Island 2.8m
+              </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full frosted-dark-pill text-text-bright font-mono text-[11px] whitespace-nowrap">
+                49.5 m³
+              </span>
+</div>
+<button aria-label="Favorite Project" class="w-9 h-9 rounded-full frosted-dark-pill flex items-center justify-center text-text-bright transition-all active:scale-90 hover:bg-white/10 shrink-0">
+<span class="material-symbols-outlined text-[18px] text-white">favorite</span>
+</button>
+</div>
+<!-- Floating Precision Tag Bottom-Right of photo -->
+<div class="absolute right-3.5 bottom-3.5 z-10">
+<span class="px-2.5 py-0.5 rounded-full bg-electric-lime text-midnight-black font-mono text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              CALIBRATED
+            </span>
+</div>
+</div>
+<!-- Frosted Glass Card Body Tray -->
+<div class="p-4 frosted-glass-tray flex flex-col gap-3">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0 flex-1">
+<h2 class="font-headline text-[17px] font-bold text-white tracking-tight truncate">
+                Penthouse Kitchen Studio
+              </h2>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-mono text-[11px] text-text-muted truncate">
+                  Waterfall Island • Induction Cutout
+                </span>
+<span class="w-1 h-1 rounded-full bg-electric-lime shrink-0"></span>
+<span class="font-mono text-[11px] text-electric-lime shrink-0 font-semibold uppercase">Ready for Millwork</span>
+</div>
+</div>
+<button aria-label="Open Project" class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0 shadow-md transition-all active:scale-90 hover:bg-electric-lime hover:text-midnight-black group-hover:border-electric-lime/50">
+<span class="material-symbols-outlined text-[19px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">arrow_outward</span>
+</button>
+</div>
+<!-- Metrics Row & Quick CAD/AR Actions -->
+<div class="pt-2 border-t border-white/10 flex items-center justify-between text-text-muted">
+<div class="flex items-center gap-3 font-mono text-[11px]">
+<div><span class="text-white font-semibold">18.6</span> m² Area</div>
+<span class="text-white/20">|</span>
+<div><span class="text-white font-semibold">2.80</span>m Clearance</div>
+<span class="text-white/20">|</span>
+<div class="text-electric-lime font-medium">LiDAR 99.9%</div>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<button class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-text-bright hover:bg-white/20 transition-all text-[14px]" title="Export CAD">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+</button>
+<button class="w-8 h-8 rounded-full frosted-glass-pill flex items-center justify-center text-electric-lime hover:bg-white/20 transition-all text-[14px]" title="Open AR View">
+<span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Frosted Glass Cloud Sync Banner -->
+<div class="p-4 rounded-[22px] frosted-glass-card flex items-center justify-between gap-3 shadow-lg">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-electric-lime/20 border border-electric-lime/30 flex items-center justify-center text-electric-lime shrink-0 shadow-[0_0_12px_rgba(221,248,61,0.25)]">
+<span class="material-symbols-outlined text-[20px]">cloud_sync</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline text-[13px] font-semibold text-white truncate">LiDAR Cloud Spatial Mesh</p>
+<p class="font-mono text-[10px] text-text-muted truncate">2 pending floorplan uploads • Auto-optimized</p>
+</div>
+</div>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full frosted-glass-pill text-text-bright font-mono text-[11px] font-bold uppercase transition-all hover:bg-white/20 active:scale-95 border border-white/30">
+          Sync
+        </button>
+</div>
+</div>
+</main>
+<!-- Standardized 5-Tab Frosted Glass Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-[#1C1E36]/80 backdrop-blur-2xl border-t border-white/15 shadow-[0_-8px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center h-16 px-2 relative">
+<!-- 1. Hub -->
+<a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1 text-text-muted hover:text-text-bright transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span class="font-headline text-[11px] font-medium tracking-tight">Hub</span>
+</a>
+<!-- 2. AR Tape -->
+<a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1 text-text-muted hover:text-text-bright transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">square_foot</span>
+<span class="font-headline text-[11px] font-medium tracking-tight">AR Tape</span>
+</a>
+<!-- 3. Blueprints (Active Context: Saved Spatial Projects) -->
+<a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1 text-electric-lime transition-all" href="#">
+<div class="relative flex flex-col items-center">
+<span class="material-symbols-outlined text-[24px] font-bold" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span class="w-1 h-1 rounded-full bg-electric-lime mt-0.5 shadow-[0_0_8px_#DDF83D]"></span>
+</div>
+<span class="font-headline text-[11px] font-bold tracking-tight text-electric-lime">Blueprints</span>
+</a>
+<!-- 4. Tools -->
+<a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1 text-text-muted hover:text-text-bright transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">handyman</span>
+<span class="font-headline text-[11px] font-medium tracking-tight">Tools</span>
+</a>
+<!-- 5. AI Advisor -->
+<a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] py-1 text-text-muted hover:text-text-bright transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">psychology</span>
+<span class="font-headline text-[11px] font-medium tracking-tight">AI Advisor</span>
+</a>
+</div>
+</nav>
+<!-- Interactive Tactile Feedback Script -->
+<script>
+    document.querySelectorAll('article').forEach(card => {
+      card.addEventListener('pointerdown', () => {
+        card.style.transform = 'scale(0.985)';
+      });
+      card.addEventListener('pointerup', () => {
+        card.style.transform = '';
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transform = '';
+      });
+    });
+  </script>
+</body></html>

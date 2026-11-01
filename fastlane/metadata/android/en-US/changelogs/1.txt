@@ -1,0 +1,7 @@
+MeasurePulse AI 1.0.0 – first release
+• 3D AR laser tape: single line, room chain, angle and 3D box fit, with voice "Mark" and volume-key pins
+• Room blueprint editor with area, volume and scaled A4 PDF export
+• Height & distance rangefinder, vernier caliper with thread gauge, bubble level with wall laser
+• Help With AI room advisor: tiles, paint, AC and TV size
+• Saved projects gallery and 3 home-screen widgets
+• Works on phones without ARCore (Sensor Mode)

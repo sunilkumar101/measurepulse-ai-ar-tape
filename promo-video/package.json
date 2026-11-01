@@ -1,0 +1,40 @@
+{
+  "name": "promo-video",
+  "version": "1.0.0",
+  "description": "MeasurePulse AI \u2014 Remotion store banner video + Play Store stills",
+  "repository": {},
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "private": true,
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "@remotion/fonts": "^4.0.539",
+    "@remotion/transitions": "^4.0.539",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.539",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "10.12.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion bundle",
+    "upgrade": "remotion upgrade",
+    "lint": "eslint src && tsc",
+    "render:16x9": "remotion render src/index.ts MeasurePulseAutoplayBanner ../playstore_assets/measurepulse_promo_16x9.mp4 --codec=h264 --crf=18 --concurrency=50%",
+    "render:9x16": "remotion render src/index.ts MeasurePulseAutoplayBannerVertical ../playstore_assets/measurepulse_autoplay_banner_9x16.mp4 --codec=h264 --crf=18 --concurrency=50%",
+    "render:stills": "node scripts/render-assets.mjs",
+    "sheet": "node scripts/sheet.mjs && python scripts/tile.py"
+  },
+  "allowScripts": {
+    "esbuild": false
+  }
+}

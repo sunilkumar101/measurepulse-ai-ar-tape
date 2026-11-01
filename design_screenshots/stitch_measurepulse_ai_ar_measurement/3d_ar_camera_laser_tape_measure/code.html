@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>3D AR Camera Laser Tape Measure</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            lime: {
+              DEFAULT: '#DDF83D',
+              glow: 'rgba(221, 248, 61, 0.45)',
+              dark: '#111322',
+            },
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #101223;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Smoked frosted dark glass for crisp readability over camera background */
+    .smoked-glass {
+      background: rgba(17, 19, 36, 0.76);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .smoked-glass-sheet {
+      background: rgba(16, 18, 35, 0.88);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 -12px 35px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Laser beam effects */
+    .laser-lime {
+      background: #DDF83D;
+      box-shadow: 0 0 10px #DDF83D, 0 0 20px rgba(221, 248, 61, 0.8), 0 0 3px #ffffff;
+    }
+
+    .laser-violet {
+      background: #c084fc;
+      box-shadow: 0 0 10px #c084fc, 0 0 20px rgba(192, 132, 252, 0.75), 0 0 3px #ffffff;
+    }
+
+    .anchor-glow {
+      box-shadow: 0 0 0 3px rgba(221, 248, 61, 0.35), 0 0 14px 3px #DDF83D;
+    }
+
+    .ai-orb-sphere {
+      background: radial-gradient(circle at 35% 30%, #ffffff 0%, #d946ef 35%, #6366f1 70%, #1e1b4b 100%);
+      box-shadow: 0 0 14px rgba(217, 70, 239, 0.7), 0 0 26px rgba(99, 102, 241, 0.5);
+    }
+
+    @keyframes wave {
+      0%, 100% { height: 5px; }
+      50% { height: 16px; }
+    }
+    .wave-bar {
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    /* Reticle Pulse */
+    @keyframes reticle-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.08); opacity: 0.6; }
+    }
+    .reticle-pulse {
+      animation: reticle-pulse 2.4s ease-in-out infinite;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="w-full h-full relative flex flex-col justify-between overflow-hidden bg-[#101223] text-white">
+<!-- FULL BLEED CAMERA BACKGROUND -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<img alt="AR Camera Viewport Twilight Room" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida/AEtjO1VqNGcat9pYyybW41EZvXeYq3QMl1L6idp9eJbWvt8GUbMTbAmBJnlDAIsITzuLMICZPX9TL1OYGhPTpYmxwXyP15P8RHjN8JUU1zioZ8N5cCbP4n8E3Xh_drXBBwpr8hVq9-KUKZsMWYE0IhqDN-g9NTCr-1TYL1rpWxu9Mc0GuA_jPzTlK7f-eKOSU-G_krksj86nY9EIeRT7c-xrD3NjWSZqOetbOCKZ9kaqeM8"/>
+<!-- Subtle depth gradient overlays for contrast -->
+<div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70 pointer-events-none"></div>
+</div>
+<!-- RETICLE IN VIEWPORT CENTER -->
+<div class="absolute top-[41%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none flex items-center justify-center">
+<div class="w-12 h-12 rounded-full border border-[#DDF83D]/50 flex items-center justify-center reticle-pulse">
+<div class="w-1.5 h-1.5 rounded-full bg-[#DDF83D] shadow-[0_0_8px_#DDF83D]"></div>
+</div>
+<div class="absolute w-14 h-[1px] bg-gradient-to-r from-transparent via-[#DDF83D]/60 to-transparent"></div>
+<div class="absolute h-14 w-[1px] bg-gradient-to-b from-transparent via-[#DDF83D]/60 to-transparent"></div>
+</div>
+<!-- 1. TOP HEADER & HUD BAR -->
+<header class="relative z-30 pt-11 px-4 flex flex-col gap-2.5">
+<!-- Status Row -->
+<div class="flex items-center justify-between text-[11px] font-mono tracking-wider text-white/80 px-1">
+<div class="flex items-center gap-1.5 font-sans font-bold text-white text-[14px]">
+<span>9:41</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="smoked-glass flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#DDF83D] animate-ping"></span>
+<span class="text-[#DDF83D] font-mono font-semibold tracking-wider">LiDAR 60 FPS</span>
+</div>
+<span class="text-xs font-mono font-semibold">5G</span>
+<div class="w-5 h-2.5 border border-white/70 rounded-[3px] p-0.5 flex items-center">
+<div class="h-full w-4/5 bg-white rounded-xs"></div>
+</div>
+</div>
+</div>
+<!-- Navigation Bar Floating Controls -->
+<div class="flex items-center justify-between mt-1">
+<!-- Back Button -->
+<button aria-label="Back" class="w-11 h-11 rounded-full smoked-glass flex items-center justify-center text-white active:scale-95 transition-transform">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M15 19l-7-7 7-7"></path>
+</svg>
+</button>
+<!-- Center HUD Pill (ARCore Spatial Lock / Title) -->
+<div class="smoked-glass px-4 py-2 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#DDF83D] shadow-[0_0_8px_#DDF83D]"></span>
+<span class="text-xs font-bold tracking-wide text-white font-sans uppercase">3D AR Laser Tape</span>
+<span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/20 px-1.5 py-0.5 rounded-full border border-emerald-400/30">Locked</span>
+</div>
+<!-- Undo Button -->
+<button aria-label="Undo" class="w-11 h-11 rounded-full smoked-glass flex items-center justify-center text-white active:scale-95 transition-transform">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" viewbox="0 0 24 24">
+<path d="M3 10h10a5 5 0 0 1 5 5v2"></path>
+<path d="M7 6L3 10l4 4"></path>
+</svg>
+</button>
+</div>
+</header>
+<!-- 2. SPATIAL AR OVERLAY ELEMENTS -->
+<div class="absolute inset-0 z-10 pointer-events-none">
+<!-- VERTICAL WALL LASER LINE (Height measurement) -->
+<div class="absolute top-[18%] right-[22%] h-[32%] flex flex-col items-center">
+<div class="w-3.5 h-3.5 rounded-full border-2 border-white bg-purple-400 shadow-[0_0_12px_#c084fc] flex items-center justify-center">
+<div class="w-1 h-1 rounded-full bg-white"></div>
+</div>
+<div class="w-[2px] flex-1 laser-violet my-0.5"></div>
+<div class="w-3.5 h-3.5 rounded-full border-2 border-white bg-purple-400 shadow-[0_0_12px_#c084fc] flex items-center justify-center">
+<div class="w-1 h-1 rounded-full bg-white"></div>
+</div>
+<!-- Floating Readout Pill for Height -->
+<div class="absolute top-1/2 left-4 -translate-y-1/2 pointer-events-auto">
+<div class="smoked-glass px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 whitespace-nowrap shadow-xl">
+<span class="material-symbols-outlined text-[14px] text-purple-300">height</span>
+<span class="text-[11px] font-sans font-medium text-white/80">H:</span>
+<span class="text-xs font-mono font-bold text-white tracking-tight">2.75 m</span>
+<span class="text-[10px] font-mono text-purple-200/80">(9′ 0 ¼″)</span>
+</div>
+</div>
+</div>
+<!-- HORIZONTAL LASER BEAM MEASUREMENT -->
+<div class="absolute top-[52%] left-[12%] w-[76%]">
+<div class="relative w-full flex items-center">
+<!-- Left Anchor -->
+<div class="w-4 h-4 rounded-full bg-[#DDF83D] anchor-glow border-2 border-white flex items-center justify-center z-10">
+<div class="w-1.5 h-1.5 rounded-full bg-[#111322]"></div>
+</div>
+<!-- Laser Beam -->
+<div class="flex-1 h-[2.5px] laser-lime"></div>
+<!-- Right Anchor -->
+<div class="w-4 h-4 rounded-full bg-[#DDF83D] anchor-glow border-2 border-white flex items-center justify-center z-10">
+<div class="w-1.5 h-1.5 rounded-full bg-[#111322]"></div>
+</div>
+</div>
+<!-- FLOATING READOUT PILL (Electric Acid Lime with Deep Midnight Black text) -->
+<div class="absolute -top-11 left-1/2 -translate-x-1/2 pointer-events-auto">
+<div class="bg-[#DDF83D] text-[#111322] px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-[0_4px_22px_rgba(221,248,61,0.55)] border border-white/60">
+<span class="w-2 h-2 rounded-full bg-[#111322]"></span>
+<span class="text-sm font-mono font-extrabold tracking-tight">4.82 m</span>
+<span class="text-[11px] font-mono font-bold text-[#111322]/85">(15′ 9 ¾″)</span>
+<span class="text-[10px] font-mono font-semibold text-[#111322]/70 pl-1.5 border-l border-[#111322]/25">±0.5 cm</span>
+</div>
+</div>
+</div>
+<!-- VOICE ANTI-SHAKE AI PROMPT CAPSULE (Smoked Dark Glass backing) -->
+<div class="absolute bottom-[205px] left-4 right-4 pointer-events-auto">
+<div class="smoked-glass px-3.5 py-2.5 rounded-full flex items-center justify-between">
+<!-- 3D Iridescent Orb + Waveform -->
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full ai-orb-sphere flex-shrink-0 relative flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-white/90 absolute top-1.5 left-1.5 filter blur-[0.2px]"></div>
+</div>
+<!-- Waveform bars -->
+<div class="flex items-center gap-[2.5px] h-4">
+<span class="w-[2px] bg-[#DDF83D] rounded-full h-2 wave-bar" style="animation-delay: 0.1s"></span>
+<span class="w-[2px] bg-white rounded-full h-3.5 wave-bar" style="animation-delay: 0.3s"></span>
+<span class="w-[2px] bg-purple-300 rounded-full h-4 wave-bar" style="animation-delay: 0.15s"></span>
+<span class="w-[2px] bg-[#DDF83D] rounded-full h-2.5 wave-bar" style="animation-delay: 0.4s"></span>
+<span class="w-[2px] bg-white rounded-full h-3.5 wave-bar" style="animation-delay: 0.25s"></span>
+<span class="w-[2px] bg-purple-300 rounded-full h-1.5 wave-bar" style="animation-delay: 0.5s"></span>
+<span class="w-[2px] bg-[#DDF83D] rounded-full h-3 wave-bar" style="animation-delay: 0.2s"></span>
+</div>
+</div>
+<!-- Instruction Text -->
+<div class="text-right pl-2">
+<p class="text-[12px] font-sans font-medium text-white tracking-tight leading-tight">
+            Say <span class="text-[#DDF83D] font-bold">"Mark"</span> or Tap <span class="text-[#DDF83D] font-bold text-[13px]">+</span> to Lock Point
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. LOWER CONTROLS & BOTTOM NAVIGATION -->
+<div class="relative z-30 w-full flex flex-col">
+<!-- MODE TRAY & SHUTTER ACTION BAR SHEET -->
+<div class="w-full smoked-glass-sheet rounded-t-[28px] px-4 pt-3 pb-3 flex flex-col gap-3">
+<!-- Drag handle -->
+<div class="w-10 h-1 rounded-full bg-white/30 mx-auto"></div>
+<!-- HORIZONTAL MEASUREMENT MODE PILLS -->
+<div class="flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+<!-- Single Line (Active) -->
+<button class="flex items-center gap-1.5 bg-[#DDF83D] text-[#111322] px-3.5 py-1.5 rounded-full font-sans font-bold text-xs shadow-[0_0_16px_rgba(221,248,61,0.4)] whitespace-nowrap active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]">straighten</span>
+<span>Single Line</span>
+</button>
+<!-- Room Chain -->
+<button class="flex items-center gap-1.5 smoked-glass text-white/80 px-3 py-1.5 rounded-full font-sans font-medium text-xs whitespace-nowrap active:scale-95 transition-transform hover:text-white">
+<span class="material-symbols-outlined text-[15px] text-white/60">polyline</span>
+<span>Room Chain</span>
+</button>
+<!-- 3D Box Fit -->
+<button class="flex items-center gap-1.5 smoked-glass text-white/80 px-3 py-1.5 rounded-full font-sans font-medium text-xs whitespace-nowrap active:scale-95 transition-transform hover:text-white">
+<span class="material-symbols-outlined text-[15px] text-white/60">view_in_ar</span>
+<span>3D Box Fit</span>
+</button>
+<!-- Laser Level -->
+<button class="flex items-center gap-1 smoked-glass text-white/80 px-3 py-1.5 rounded-full font-sans font-medium text-xs whitespace-nowrap active:scale-95 transition-transform hover:text-white">
+<span class="material-symbols-outlined text-[15px] text-[#DDF83D]">square_foot</span>
+<span>Laser Level</span>
+</button>
+</div>
+<!-- LARGE MASTER TRIGGER PILL / SHUTTER ACTION BAR -->
+<button class="relative w-full h-[58px] rounded-full smoked-glass p-1.5 flex items-center justify-between border border-white/30 shadow-2xl active:scale-[0.98] transition-transform cursor-pointer group">
+<!-- Solid Lime Circular Plus Button -->
+<div class="w-12 h-12 rounded-full bg-[#DDF83D] flex items-center justify-center text-[#111322] shadow-[0_0_18px_rgba(221,248,61,0.6)] flex-shrink-0 group-active:scale-95 transition-transform">
+<svg class="w-6 h-6 stroke-[3]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 24 24">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<line x1="5" x2="19" y1="12" y2="12"></line>
+</svg>
+</div>
+<!-- Center CTA Label -->
+<div class="flex-1 text-center px-2">
+<span class="text-sm font-sans font-bold text-white tracking-wide group-hover:text-[#DDF83D] transition-colors">
+            Drop Laser Anchor Point
+          </span>
+</div>
+<!-- Right Directional Chevrons >> -->
+<div class="w-10 h-10 rounded-full flex items-center justify-center text-white/70 group-hover:text-[#DDF83D] group-hover:translate-x-0.5 transition-all flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="9 18 15 12 9 6"></polyline>
+<polyline points="13 18 19 12 13 6"></polyline>
+</svg>
+</div>
+</button>
+</div>
+<!-- STANDARDIZED 5-TAB FROSTED GLASS BOTTOM NAVIGATION BAR -->
+<nav class="w-full bg-[#0d0f20]/95 backdrop-blur-2xl border-t border-white/10 px-3 pt-2 pb-5 flex items-center justify-around">
+<!-- Tab 1: Hub -->
+<button class="flex flex-col items-center gap-1 text-white/60 active:scale-95 transition-transform py-1 px-2 hover:text-white">
+<span class="material-symbols-outlined text-[22px]">grid_view</span>
+<span class="text-[10px] font-sans font-medium tracking-tight">Hub</span>
+</button>
+<!-- Tab 2: AR Tape (Active Highlighted) -->
+<button class="relative flex flex-col items-center gap-1 text-[#DDF83D] active:scale-95 transition-transform py-1 px-3">
+<span class="material-symbols-outlined text-[22px] drop-shadow-[0_0_8px_rgba(221,248,61,0.6)]">square_foot</span>
+<span class="text-[10px] font-sans font-bold tracking-tight">AR Tape</span>
+<span class="w-1 h-1 rounded-full bg-[#DDF83D] shadow-[0_0_6px_#DDF83D]"></span>
+</button>
+<!-- Tab 3: Blueprints -->
+<button class="flex flex-col items-center gap-1 text-white/60 active:scale-95 transition-transform py-1 px-2 hover:text-white">
+<span class="material-symbols-outlined text-[22px]">architecture</span>
+<span class="text-[10px] font-sans font-medium tracking-tight">Blueprints</span>
+</button>
+<!-- Tab 4: Tools -->
+<button class="flex flex-col items-center gap-1 text-white/60 active:scale-95 transition-transform py-1 px-2 hover:text-white">
+<span class="material-symbols-outlined text-[22px]">build</span>
+<span class="text-[10px] font-sans font-medium tracking-tight">Tools</span>
+</button>
+<!-- Tab 5: AI Advisor -->
+<button class="flex flex-col items-center gap-1 text-white/60 active:scale-95 transition-transform py-1 px-2 hover:text-white">
+<span class="material-symbols-outlined text-[22px]">psychology</span>
+<span class="text-[10px] font-sans font-medium tracking-tight">AI Advisor</span>
+</button>
+</nav>
+</div>
+</body></html>

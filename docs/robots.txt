@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sunilkumar101.github.io/measurepulse-ai-ar-tape/sitemap.xml

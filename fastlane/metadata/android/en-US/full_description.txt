@@ -1,0 +1,58 @@
+MeasurePulse AI turns your Android phone into a complete measuring kit: a 3D AR ruler and tape measure app, a room floor plan creator, a height measure camera, a digital vernier caliper and a bubble level, all in one frosted-glass app. Point, say "Mark", and get dimensions, area and volume in metric or imperial.
+
+📏 3D AR LASER TAPE MEASURE
+• Smart measure distance with an AR ruler: single lines, room chains, angles and 3D boxes
+• Hands-free pins: say "Mark" or press a volume key, so your hand never shakes the reading
+• Anti-shake lock keeps the reading from just before you press
+• Works with ARCore depth and planes, and on phones without ARCore in Sensor Mode
+• Results in m, cm, mm, inches, feet and feet-inches down to 1/32"
+• Save snapshots with the measurements drawn on the photo
+
+🏠 ROOM FLOOR PLAN CREATOR
+• Mark each corner and get an editable 2D CAD floor plan of the room
+• Area and volume calculator: floor area, perimeter, ceiling height, room volume and net wall area
+• Drag corners with 90° snapping, set exact wall lengths, add doors and windows
+• Export a scaled A4 PDF blueprint (1:20 to 1:500) with a wall schedule and totals
+• Furniture fit check: drop a 3D box the size of a sofa, bed or TV and see the clearance before you buy
+
+🏢 HEIGHT MEASURE CAMERA & RANGEFINDER
+• Estimate the height of a building, tree, wall or doorway and the distance to it
+• Use a reference of known height or your own eye height
+• On-device object detection places brackets, or drag them yourself
+
+🔩 DIGITAL VERNIER CALIPER (MM / INCH)
+• On-screen caliper calibrated with any bank card for 0.1 mm resolution
+• Readings in millimetres and fractional inches
+• Thread pitch gauge suggests matching ISO metric bolts (M3 to M24) and hex sizes
+
+🎯 BUBBLE LEVEL & CLINOMETER
+• 2D bullseye spirit level for flat surfaces and an edge level for frames and shelves
+• Slope in degrees, percent and X:12 roof pitch
+• Beep and vibration when you reach true level, plus one-tap zero calibration
+• AR wall laser line for hanging pictures straight
+
+✨ "HELP WITH AI" ROOM ADVISOR
+• Floor tile calculator with waste, adhesive and grout
+• Paint calculator with coats, primer and can sizes
+• AC tonnage calculator with BTU, based on room size, ceiling height, sun and occupants
+• TV size recommendation from your viewing distance
+• Export a shopping-list PDF with editable prices
+• Rule-based estimates, clearly labelled, for planning a renovation
+
+📁 SAVED PROJECTS & WIDGETS
+• Gallery of floor plans, AR fit checks, tool readings and PDF exports, with search and filters
+• Three frosted-glass home-screen widgets: room hub, last length converter and a quick tool dock
+
+🔒 PRIVATE BY DESIGN
+Camera frames, AR depth data and the "Mark" voice keyword are processed only on your phone. They are never recorded, stored or uploaded. Your rooms and readings are saved only on your device. No sign-up needed.
+
+💎 MEASUREPULSE AI PRO
+Free to use with ads. A one-time Pro purchase removes all ads and unlocks instant PDF blueprints and shopping lists. No subscription.
+
+WHO IT'S FOR
+Home owners planning a renovation, renters checking if furniture fits, interior designers, real estate agents, DIY makers, contractors preparing quick quotes, and anyone who needs a tape measure app when a real tape isn't at hand.
+
+GOOD TO KNOW
+Phone measurements depend on your device's camera and sensors, light and surface texture. AR measurements on ARCore phones are typically within about 1 cm at 1 to 3 m. Treat all results as estimates and confirm critical dimensions with a physical tape before cutting or ordering materials.
+
+Measure a room, draw the floor plan, check the furniture fit and plan the materials, all from one app. Download MeasurePulse AI and start measuring.

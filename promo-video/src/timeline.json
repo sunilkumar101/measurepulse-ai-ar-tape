@@ -1,0 +1,57 @@
+{
+  "_note": "All beats in seconds. 18 s @ 60 fps. Scenes overlap ~0.4 s so nothing ever cuts to black.",
+  "fps": 60,
+  "duration": 18,
+  "s1": {
+    "start": 0,
+    "end": 3.3,
+    "orbIn": 0,
+    "line1": -0.45,
+    "line2": 0.35,
+    "waveLive": 0.9,
+    "exit": 2.9
+  },
+  "s2": {
+    "start": 2.9,
+    "end": 7.3,
+    "phoneIn": 0,
+    "tiltSettle": 1.1,
+    "anchorA": 1.25,
+    "sayMark": 1.6,
+    "markHeard": 2.25,
+    "anchorB": 2.35,
+    "label": 2.5,
+    "exit": 3.95
+  },
+  "s3": {
+    "start": 6.9,
+    "end": 11.3,
+    "phoneIn": 0,
+    "sheetIn": 0.25,
+    "plan": 0.55,
+    "area": 0.9,
+    "boxIn": 1.6,
+    "boxSnap": 2.3,
+    "fits": 2.45,
+    "exit": 3.95
+  },
+  "s4": {
+    "start": 10.9,
+    "end": 15.3,
+    "header": 0,
+    "cards": 0.15,
+    "cardStagger": 0.17,
+    "tools": 1.35,
+    "jaws": 1.5,
+    "bubble": 1.55,
+    "exit": 3.95
+  },
+  "s5": {
+    "start": 14.9,
+    "end": 18,
+    "widgets": 0,
+    "widgetStagger": 0.18,
+    "title": 0.7,
+    "cta": 1.05
+  }
+}

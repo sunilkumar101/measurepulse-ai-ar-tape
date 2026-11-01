@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/assets/img/og-feature-graphic.jpg</image:loc></image:image>
+    <image:image><image:loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/assets/img/01_ar_laser_tape.webp</image:loc></image:image>
+    <image:image><image:loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/assets/img/02_room_blueprint.webp</image:loc></image:image>
+    <image:image><image:loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/assets/img/05_vernier_caliper.webp</image:loc></image:image>
+    <video:video>
+      <video:thumbnail_loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/assets/video/promo-poster.jpg</video:thumbnail_loc>
+      <video:title>MeasurePulse AI – 18-second app preview</video:title>
+      <video:description>AR laser tape with voice pin, room blueprint with furniture fit, AI room advisor, caliper, level and home-screen widgets.</video:description>
+      <video:content_loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/assets/video/measurepulse-promo-720p.mp4</video:content_loc>
+      <video:duration>18</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/privacy-policy.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sunilkumar101.github.io/measurepulse-ai-ar-tape/terms.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>

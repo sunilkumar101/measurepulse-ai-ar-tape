@@ -1,0 +1,4 @@
+# Google Play service-account key (git-ignored by *service-account*.json). Create it in
+# Google Cloud > IAM > Service accounts, then grant it access in Play Console > Users and permissions.
+json_key_file(ENV["SUPPLY_JSON_KEY"] || "fastlane/play-service-account.json")
+package_name("com.measurepulse.ar")
