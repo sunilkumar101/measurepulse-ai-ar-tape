@@ -11,10 +11,11 @@ _Last updated 1 Nov 2026 · app version 1.0.0 (versionCode 1)_
 | Privacy policy | ✅ Live (HTTP 200): https://sunilkumar101.github.io/measurepulse-ai-ar-tape/privacy-policy.html |
 | Terms of use | ✅ Live: https://sunilkumar101.github.io/measurepulse-ai-ar-tape/terms.html |
 | sitemap.xml / robots.txt | ✅ Live: `/sitemap.xml`, `/robots.txt` |
-| app-ads.txt | ⚠️ Template live at `/measurepulse-ai-ar-tape/app-ads.txt`, but it needs your AdMob publisher ID **and** a copy at the domain root (see below) |
-| Search Console | ⏳ **Not verified yet**: it needs you to sign in to Google (see the steps below) |
-| Signed release AAB | ✅ `app/build/outputs/bundle/release/app-release.aab` (34.2 MB) |
-| Play Console upload | ⏳ **Not uploaded**: the app must first be created in Play Console and the first bundle uploaded by hand |
+| app-ads.txt | ✅ `https://sunilkumar101.github.io/app-ads.txt` (domain root, already live) and `docs/app-ads.txt` both list `pub-3262047496692890` |
+| AdMob | ✅ App "MeasurePulse AI" + Banner / Interstitial / Rewarded units created (1 Nov 2026). ⏳ GDPR consent message still to publish (see below) |
+| Search Console | ⏸️ Skipped for now (owner's choice) — steps below |
+| Signed release AAB | ✅ `app/build/outputs/bundle/release/app-release.aab` (34.2 MB, real AdMob IDs) |
+| Play Console upload | ✅ App "AR Tape Measure: 3D Room Plan" (`com.measurepulse.ar`) created; version 1 (1.0.0) uploaded to **Internal testing** as a **draft** with release notes. Not rolled out yet: add testers first |
 
 ## Release build
 
@@ -25,14 +26,18 @@ _Last updated 1 Nov 2026 · app version 1.0.0 (versionCode 1)_
 - Signed with the **upload key** `keystore/measurepulse-upload.jks` (alias `measurepulse-upload`, RSA 4096, 30 years).
   - Certificate SHA-256: `23:86:08:27:EA:04:96:C2:4D:D5:BD:6E:15:88:A8:9F:A6:75:2E:04:D4:1B:B0:A9:F0:45:BE:02:A3:7A:99:1D`.
   - Passwords are in `keystore/KEYSTORE_CREDENTIALS.txt`. Both files are git-ignored. **Back them up now** (password manager plus an offline copy).
-- ⚠️ **AdMob IDs:** this release build still uses Google's **test** ad IDs, because no real IDs are set. That is fine for internal testing. Before production, put the real IDs in `local.properties`:
-  - `measurepulse.admob.appId=ca-app-pub-…~…`
-  - `measurepulse.admob.banner=…`
-  - `measurepulse.admob.interstitial=…`
-  - `measurepulse.admob.rewarded=…`
-  - `measurepulse.admob.native=…`
+- **AdMob IDs (real, in git-ignored `local.properties`, verified inside the release APK):**
 
-  Then rebuild and bump `versionCode`.
+  | Item | ID |
+  |---|---|
+  | App | `ca-app-pub-3262047496692890~6768119055` |
+  | Banner | `ca-app-pub-3262047496692890/2828874043` |
+  | Interstitial | `ca-app-pub-3262047496692890/6736329462` |
+  | Rewarded (PDF export) | `ca-app-pub-3262047496692890/5833864220` |
+
+  Native isn't used by the app, so no native unit exists. Debug builds still always use Google's test IDs. Don't tap your own live ads in release builds; your Oppo is registered as a test device only in debug builds.
+- **AdMob GDPR message (to do, ~2 min):** AdMob → Privacy & messaging → European regulations → on "WiFi Pulse EU consent" choose ⋮ → Duplicate → app **MeasurePulse AI**, privacy policy `https://sunilkumar101.github.io/measurepulse-ai-ar-tape/privacy-policy.html` → Publish. Without it, EEA/UK users get no consent form and limited ads.
+- After the app is live on Play: AdMob → Apps → MeasurePulse AI → **Add store** (link it to `com.measurepulse.ar`) to lift "Limited ad serving".
 
 ## Google Search Console — what's left (≈5 minutes)
 
@@ -67,12 +72,8 @@ The upload couldn't be automated:
 
 Everything else is ready.
 
-1. **Create the app.** In Play Console, click **Create app**:
-   - name `AR Tape Measure: 3D Room Plan`
-   - default language English (US)
-   - App, Free
-   - accept the declarations
-2. **Set up the internal test.** Go to **Testing → Internal testing → Create release**. Accept Play App Signing, upload `app-release.aab`, and paste the release notes from `fastlane/metadata/android/en-US/changelogs/1.txt`.
+1. ✅ **App created** (1 Nov 2026) in the "Chanchal Raj" developer account: `AR Tape Measure: 3D Room Plan`, `com.measurepulse.ar`, English (US), App, Free.
+2. ✅ **Internal testing draft:** version 1 (1.0.0) uploaded with en-US release notes and saved as a draft. Play shows no errors and two warnings: no testers yet, and no native debug symbols (harmless; the native code comes from Google libraries). **To finish:** Internal testing → **Testers** tab → create an email list with your testers → Save. Then open the draft release → **Next** → **Start rollout to Internal testing**.
 3. **Store listing.** Copy these in, or let fastlane do it (step 7):
    - `fastlane/metadata/android/en-US/title.txt`, `short_description.txt` and `full_description.txt`
    - the 8 images in `images/phoneScreenshots/`

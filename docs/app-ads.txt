@@ -1,5 +1,4 @@
 # app-ads.txt for MeasurePulse AI (com.measurepulse.ar)
-# Replace pub-XXXXXXXXXXXXXXXX with your AdMob publisher ID (AdMob > Settings > Account information).
-# AdMob only reads app-ads.txt at the ROOT of the developer-website domain - see
-# PLAY_STORE_AND_SEO_SUBMISSION_SUMMARY.md for where this file must also be published.
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# AdMob reads app-ads.txt from the root of the developer-website domain
+# (https://sunilkumar101.github.io/app-ads.txt), which carries the same line.
+google.com, pub-3262047496692890, DIRECT, f08c47fec0942fa0
